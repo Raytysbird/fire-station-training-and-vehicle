@@ -1,0 +1,87 @@
+1/23/23 9:48:55 PM	This log contains information about the import schema operation into project 'FireStationDb' on computer 'KANGPC' by user 'Kang'.
+1/23/23 9:48:55 PM	Import of database schema has started.
+1/23/23 9:49:05 PM	Gathering database credentials
+1/23/23 9:49:05 PM	Gathering database options
+1/23/23 9:49:05 PM	Gathering generic database scoped configuration option
+1/23/23 9:49:05 PM	Gathering users
+1/23/23 9:49:05 PM	Gathering roles
+1/23/23 9:49:05 PM	Gathering application roles
+1/23/23 9:49:05 PM	Gathering role memberships
+1/23/23 9:49:05 PM	Gathering filegroups
+1/23/23 9:49:05 PM	Gathering full-text catalogs
+1/23/23 9:49:05 PM	Gathering assemblies
+1/23/23 9:49:05 PM	Gathering certificates
+1/23/23 9:49:05 PM	Gathering asymmetric keys
+1/23/23 9:49:05 PM	Gathering symmetric keys
+1/23/23 9:49:05 PM	Gathering encrypted symmetric keys
+1/23/23 9:49:05 PM	Gathering schemas
+1/23/23 9:49:05 PM	Gathering XML schema collections
+1/23/23 9:49:05 PM	Gathering user-defined data types
+1/23/23 9:49:05 PM	Gathering user-defined types
+1/23/23 9:49:05 PM	Gathering table types
+1/23/23 9:49:05 PM	Gathering unique keys for table types
+1/23/23 9:49:05 PM	Gathering primary keys for table types
+1/23/23 9:49:05 PM	Gathering indexes for table types
+1/23/23 9:49:18 PM	Gathering check constraints for table types
+1/23/23 9:49:18 PM	Gathering default constraints for table types
+1/23/23 9:49:18 PM	Gathering partition functions
+1/23/23 9:49:18 PM	Gathering partition schemes
+1/23/23 9:49:18 PM	Gathering functions
+1/23/23 9:49:18 PM	Gathering encrypted functions
+1/23/23 9:49:18 PM	Gathering aggregates
+1/23/23 9:49:18 PM	Gathering procedures
+1/23/23 9:49:18 PM	Gathering encrypted procedures
+1/23/23 9:49:18 PM	Gathering tables
+1/23/23 9:49:44 PM	Gathering primary keys
+1/23/23 9:49:44 PM	Gathering unique constraints
+1/23/23 9:49:44 PM	Gathering foreign keys
+1/23/23 9:49:44 PM	Gathering default constraints
+1/23/23 9:49:44 PM	Gathering check constraints
+1/23/23 9:49:44 PM	Gathering views
+1/23/23 9:49:44 PM	Gathering encrypted views
+1/23/23 9:49:44 PM	Gathering indexes
+1/23/23 9:49:44 PM	Gathering statistics
+1/23/23 9:49:44 PM	Gathering full-text index stoplists
+1/23/23 9:49:44 PM	Gathering search property lists
+1/23/23 9:49:44 PM	Gathering search properties
+1/23/23 9:49:44 PM	Gathering full-text indexes
+1/23/23 9:49:44 PM	Gathering column store indexes
+1/23/23 9:49:44 PM	Gathering spatial indexes
+1/23/23 9:49:44 PM	Gathering XML indexes
+1/23/23 9:49:44 PM	Gathering Selective XML indexes
+1/23/23 9:49:44 PM	Gathering encrypted triggers
+1/23/23 9:49:44 PM	Gathering triggers
+1/23/23 9:49:44 PM	Gathering encrypted and clr ddl triggers
+1/23/23 9:50:26 PM	Gathering ddl triggers
+1/23/23 9:50:26 PM	Creating edge constraints
+1/23/23 9:50:26 PM	Gathering synonyms
+1/23/23 9:50:26 PM	Gathering defaults
+1/23/23 9:50:26 PM	Gathering data constraint uddt bindings
+1/23/23 9:50:26 PM	Gathering rules
+1/23/23 9:50:26 PM	Gathering data constraint uddt bindings
+1/23/23 9:50:26 PM	Gathering message types
+1/23/23 9:50:26 PM	Gathering queues
+1/23/23 9:50:26 PM	Gathering contracts
+1/23/23 9:50:26 PM	Gathering services
+1/23/23 9:50:26 PM	Gathering event notifications
+1/23/23 9:50:26 PM	Gathering remote service bindings
+1/23/23 9:50:26 PM	Gathering broker priorities
+1/23/23 9:50:26 PM	Gathering signatures
+1/23/23 9:50:26 PM	Gathering data compression options
+1/23/23 9:50:26 PM	Gathering sequence types
+1/23/23 9:50:26 PM	Gathering security policies
+1/23/23 9:50:26 PM	Gather column encryption keys
+1/23/23 9:50:26 PM	Gathering column master keys
+1/23/23 9:50:26 PM	Gathering external data sources
+1/23/23 9:50:26 PM	Gathering external file formats
+1/23/23 9:50:26 PM	Gathering external tables
+1/23/23 9:50:26 PM	Gathering extended properties
+1/23/23 9:50:27 PM	Gathering assemblies
+1/23/23 9:50:27 PM	Gathering credentials
+1/23/23 9:50:27 PM	Gathering logins
+1/23/23 9:50:27 PM	Gathering server audits
+1/23/23 9:50:28 PM	Scanning project for duplicate elements
+1/23/23 9:50:28 PM	Finished duplicate element processing
+1/23/23 9:50:28 PM	Finished importing database.
+1/23/23 9:50:28 PM	A summary of the import was saved to the following location: C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\FireStationDb\Import Schema Logs\FireStationDb_20230124024855.log
+1/23/23 9:50:28 PM	Click Finish to continue...
