@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-fire_station_training_and_vehicle-602819f6-d5ee-4131-b941-e8cd47a0fd86</UserSecretsId>
+    <RootNamespace>fire_station_training_and_vehicle</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.11" />
+  </ItemGroup>
+
+</Project>
