@@ -13,6 +13,18 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\Screenshot_20230111_101714.png",
+      "PackagePath": "staticwebassets\\images\\Screenshot_20230111_101714.png"
+    },
+    {
+      "Id": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\bg1.jpg",
+      "PackagePath": "staticwebassets\\images\\bg1.jpg"
+    },
+    {
+      "Id": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\pizzaBackground.jpg",
+      "PackagePath": "staticwebassets\\images\\pizzaBackground.jpg"
+    },
+    {
       "Id": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

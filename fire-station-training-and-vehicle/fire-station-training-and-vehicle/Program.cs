@@ -12,8 +12,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
 
+builder.Services.AddControllersWithViews().AddRazorPagesOptions(options => {
+    options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,7 +40,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();
