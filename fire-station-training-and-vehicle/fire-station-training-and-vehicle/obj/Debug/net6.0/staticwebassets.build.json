@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uh3b8pQZk5VhWPhJ/6WsRAwR6Xhr/05VoHW7Lfn16EA=",
+  "Hash": "ncJ5z3R8JswqD2Jb7xedTA7VuYPFqfQmDo5h/v7O3FM=",
   "Source": "fire-station-training-and-vehicle",
   "BasePath": "_content/fire-station-training-and-vehicle",
   "Mode": "Default",
@@ -85,12 +85,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\bg1.jpg",
+      "Identity": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\background1.jpg",
       "SourceId": "fire-station-training-and-vehicle",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\",
       "BasePath": "_content/fire-station-training-and-vehicle",
-      "RelativePath": "images/bg1.jpg",
+      "RelativePath": "images/background1.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,7 +99,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\bg1.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\background1.jpg"
+    },
+    {
+      "Identity": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\logo.jpg",
+      "SourceId": "fire-station-training-and-vehicle",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\",
+      "BasePath": "_content/fire-station-training-and-vehicle",
+      "RelativePath": "images/logo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\logo.jpg"
     },
     {
       "Identity": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\pizzaBackground.jpg",
@@ -117,23 +134,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\pizzaBackground.jpg"
-    },
-    {
-      "Identity": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\Screenshot_20230111_101714.png",
-      "SourceId": "fire-station-training-and-vehicle",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\",
-      "BasePath": "_content/fire-station-training-and-vehicle",
-      "RelativePath": "images/Screenshot_20230111_101714.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\Screenshot_20230111_101714.png"
     },
     {
       "Identity": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\js\\site.js",

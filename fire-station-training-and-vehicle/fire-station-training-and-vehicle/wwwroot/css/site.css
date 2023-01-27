@@ -1,5 +1,6 @@
 html {
   font-size: 14px;
+ 
 }
 
 @media (min-width: 768px) {
@@ -10,20 +11,29 @@ html {
 
 html {
     position: relative;
-    min-height: 100%;
-    
+    min-height: 100%;   
 }
 
 body {
-    margin-bottom: 60px;
-    
+    margin: 0 auto; 
 }
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+    color: white;
+    text-align: center;
     white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
+    line-height: 60px;
+    background-color: #000b38;
+}
+.navLink {
+    color: white;
+    font-size: 1.1rem;
+    display: block;
+    padding: 0.5rem 1rem;
+    
+    text-decoration: none;
 }
 
 .form-signin {
@@ -53,3 +63,23 @@ body {
         border-top-right-radius: 0;
     }
 
+.btn1 {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: #000b38;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+    .btn1:hover{
+        background:white;
+        border:1px solid;
+        color:navy;
+    }
+
+.logo{
+    height:80px;
+    
+}
