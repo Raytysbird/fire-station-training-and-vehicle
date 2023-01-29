@@ -17,6 +17,18 @@
       "PackagePath": "staticwebassets\\images\\background1.jpg"
     },
     {
+      "Id": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\banner1.jpg",
+      "PackagePath": "staticwebassets\\images\\banner1.jpg"
+    },
+    {
+      "Id": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\banner2.jpg",
+      "PackagePath": "staticwebassets\\images\\banner2.jpg"
+    },
+    {
+      "Id": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\banner3.jpg",
+      "PackagePath": "staticwebassets\\images\\banner3.jpg"
+    },
+    {
       "Id": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\logo.jpg",
       "PackagePath": "staticwebassets\\images\\logo.jpg"
     },

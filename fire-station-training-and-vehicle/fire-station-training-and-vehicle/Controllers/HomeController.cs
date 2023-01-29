@@ -1,6 +1,7 @@
 ﻿using fire_station_training_and_vehicle.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
@@ -15,7 +16,16 @@ namespace fire_station_training_and_vehicle.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+
+            }
+            
         }
 
         public IActionResult Privacy()

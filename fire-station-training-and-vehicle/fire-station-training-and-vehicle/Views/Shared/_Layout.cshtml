@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@*@inject SignInManager<User> signingManager;*@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,13 +8,13 @@
     <title>@ViewData["Title"] - Management</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color: #000b38;">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logo" src="~/images/logo.jpg"/></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logo" src="~/images/logo.jpg" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,18 +33,178 @@
             </div>
         </nav>
     </header>
-   
-        <main role="main" class="pb-3">
-           
-            @RenderBody()
-        </main>
-    
-     <footer class="footer">
-        
-            <p>&copy; 2023 X-Tream Labs</p>
-       
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+    </svg>
+
+    @if (@TempData["Warning"] != null)
+    {
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+            <div>
+                @TempData["Warning"]
+            </div>
+
+        </div>
+    }
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @* <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3">
+    <ul class="nav flex-column">
+    <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">
+    <span data-feather="home"></span>
+    Dashboard
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">
+    <span data-feather="file"></span>
+    Orders
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">
+    <span data-feather="shopping-cart"></span>
+    Products
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">
+    <span data-feather="users"></span>
+    Customers
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">
+    <span data-feather="bar-chart-2"></span>
+    Reports
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">
+    <span data-feather="layers"></span>
+    Integrations
+    </a>
+    </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+    <span>Saved reports</span>
+    <a class="link-secondary" href="#" aria-label="Add a new report">
+    <span data-feather="plus-circle"></span>
+    </a>
+    </h6>
+    <ul class="nav flex-column mb-2">
+    <li class="nav-item">
+    <a class="nav-link" href="#">
+    <span data-feather="file-text"></span>
+    Current month
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">
+    <span data-feather="file-text"></span>
+    Last quarter
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">
+    <span data-feather="file-text"></span>
+    Social engagement
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">
+    <span data-feather="file-text"></span>
+    Year-end sale
+    </a>
+    </li>
+    </ul>
+    </div>
+    </nav>*@
+        @*  <div id="sidebar">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 365px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+    <span class="fs-4">Sidebar</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+    <a href="#" class="nav-link active" aria-current="page">
+    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home" /></svg>
+    Home
+    </a>
+    </li>
+    <li>
+    <a href="#" class="nav-link text-white">
+    <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
+    Dashboard
+    </a>
+    </li>
+    <li>
+    <a href="#" class="nav-link text-white">
+    <svg class="bi me-2" width="16" height="16"><use xlink:href="#table" /></svg>
+    Orders
+    </a>
+    </li>
+    <li>
+    <a href="#" class="nav-link text-white">
+    <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
+    Products
+    </a>
+    </li>
+    <li>
+    <a href="#" class="nav-link text-white">
+    <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle" /></svg>
+    Customers
+    </a>
+    </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+    <strong>mdo</strong>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+    <li><a class="dropdown-item" href="#">New project...</a></li>
+    <li><a class="dropdown-item" href="#">Settings</a></li>
+    <li><a class="dropdown-item" href="#">Profile</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#">Sign out</a></li>
+    </ul>
+    </div>
+    </div>
+    </div>*@
+
+    }
+    @*<div id="mainContent">
+    @RenderBody()
+    </div>*@
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+
+
+
+
+
+
+
+    <footer class="footer">
+
+        <p>&copy; 2023 X-Tream Labs</p>
+
     </footer>
-   
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
