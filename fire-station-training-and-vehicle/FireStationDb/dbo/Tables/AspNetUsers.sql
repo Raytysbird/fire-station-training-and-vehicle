@@ -18,7 +18,7 @@
     [LastName] VARCHAR(255) NULL, 
     [Gender] VARCHAR(255) NULL, 
     [DateOfBirth] DATE NULL, 
-    [IsPasswordChanged] BIT NULL, 
+    [IsPasswordChanged] BIT NOT NULL, 
     [Address] VARCHAR(MAX) NULL, 
     CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
 );

@@ -32,7 +32,7 @@ namespace fire_station_training_and_vehicle.Models
         public string? LastName { get; set; }
         public string? Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public bool? IsPasswordChanged { get; set; }
+        public bool IsPasswordChanged { get; set; }
         public string? Address { get; set; }
 
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }

@@ -103,16 +103,22 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
 
 
             [Required]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
-
+            [Required]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
+            [Required]
+
             public string? Gender { get; set; }
 
             [Display(Name = "Date of Birth")]
             [DataType(DataType.Date)]
             [DisplayFormat(DataFormatString = "{0:MMMM dd, yyyy}")]
             public DateTime? DateOfBirth { get; set; }
+
             public bool? IsPasswordChanged { get; set; }
+            [Required]
             public string? Address { get; set; }
 
            
@@ -154,7 +160,7 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                    await _userManager.AddToRoleAsync(user, "Employee");
                     var userId = await _userManager.GetUserIdAsync(user);
                     //var details = new User { FirstName = Input.FirstName, LastName = Input.LastName, Gender = Input.Gender, Address = Input.Address, DateOfBirth = Input.DateOfBirth, IsPasswordChanged = false };
 

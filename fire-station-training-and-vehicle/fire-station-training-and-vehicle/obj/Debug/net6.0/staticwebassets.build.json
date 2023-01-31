@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "h1HQZudacoQ7krBli13/AMXVYZG/ntutVWeERTIrnEE=",
+  "Hash": "PvqtB7PCyDyVtZKrdUCIKbWtZXymS0TZo+xiV5aJ4Hs=",
   "Source": "fire-station-training-and-vehicle",
   "BasePath": "_content/fire-station-training-and-vehicle",
   "Mode": "Default",
@@ -185,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\pizzaBackground.jpg"
+    },
+    {
+      "Identity": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\images\\user.png",
+      "SourceId": "fire-station-training-and-vehicle",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\",
+      "BasePath": "_content/fire-station-training-and-vehicle",
+      "RelativePath": "images/user.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\user.png"
     },
     {
       "Identity": "C:\\CPA10\\Capstone\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\fire-station-training-and-vehicle\\wwwroot\\js\\address.js",

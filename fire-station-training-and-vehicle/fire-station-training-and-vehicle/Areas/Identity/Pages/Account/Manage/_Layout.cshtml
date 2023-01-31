@@ -1,4 +1,9 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using fire_station_training_and_vehicle.Models
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
         Layout = (string)parentLayout;
@@ -9,16 +14,12 @@
     }
 }
 
-<h1>Manage your account</h1>
+
 
 <div>
-    <h2>Change your account settings</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-9">
+ 
+    <div class="row no-gutters">
+        <div class="col-lg-11">
             @RenderBody()
         </div>
     </div>

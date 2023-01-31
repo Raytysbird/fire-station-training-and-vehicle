@@ -2,21 +2,35 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<User> _userManager;
+        private readonly FireFighterContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, FireFighterContext context)
         {
             _logger = logger;
+            _userManager = userManager;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
+            var id = _userManager.GetUserId(HttpContext.User);
+            var user =  _context.AspNetUsers.Where(x=>x.Id== id).FirstOrDefault();
+            if (user.IsPasswordChanged==false)
+            {
+                TempData["Warning"] = "We have provided you one time use passowrd. Please reset your passowrd.";
+                return RedirectToPage("/Account/Manage/ChangePassword", new { area = "Identity" });
+            }
+            if (id!=null)
             {
                 return View();
             }
