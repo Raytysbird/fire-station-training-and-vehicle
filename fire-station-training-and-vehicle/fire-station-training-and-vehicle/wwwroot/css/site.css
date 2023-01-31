@@ -79,7 +79,22 @@ body {
         border:1px solid;
         color:navy;
     }
+.btn2 {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: green;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
 
+    .btn2:hover {
+        background: white;
+        border: 1px solid;
+        color: green;
+    }
 .logo{
     height:80px;
     

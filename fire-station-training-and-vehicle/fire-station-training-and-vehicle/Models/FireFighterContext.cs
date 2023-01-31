@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace fire_station_training_and_vehicle.Models
 {
-    public partial class GameContext : DbContext
+    public partial class FireFighterContext : DbContext
     {
-        public GameContext()
+        public FireFighterContext()
         {
         }
 
-        public GameContext(DbContextOptions<GameContext> options)
+        public FireFighterContext(DbContextOptions<FireFighterContext> options)
             : base(options)
         {
         }
@@ -22,6 +22,7 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
+        public virtual DbSet<Gender> Genders { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -62,17 +63,7 @@ namespace fire_station_training_and_vehicle.Models
                     .IsUnique()
                     .HasFilter("([NormalizedUserName] IS NOT NULL)");
 
-                entity.Property(e => e.AptNumber)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Building)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.City)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                entity.Property(e => e.Address).IsUnicode(false);
 
                 entity.Property(e => e.DateOfBirth).HasColumnType("date");
 
@@ -93,22 +84,6 @@ namespace fire_station_training_and_vehicle.Models
                 entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
-
-                entity.Property(e => e.PostalCode)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Province)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StreetAddress)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UnitNumber)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
 
@@ -163,6 +138,17 @@ namespace fire_station_training_and_vehicle.Models
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.AspNetUserTokens)
                     .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<Gender>(entity =>
+            {
+                entity.ToTable("Gender");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Type)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

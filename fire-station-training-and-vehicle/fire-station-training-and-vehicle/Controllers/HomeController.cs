@@ -30,6 +30,7 @@ namespace fire_station_training_and_vehicle.Controllers
 
         public IActionResult Privacy()
         {
+           
             return View();
         }
 

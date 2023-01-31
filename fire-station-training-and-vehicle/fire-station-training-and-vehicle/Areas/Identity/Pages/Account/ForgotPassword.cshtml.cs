@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using fire_station_training_and_vehicle.Models;
 using fire_station_training_and_vehicle.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,11 +20,11 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly EmailSender _sender;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender, EmailSender sender)
+        public ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender, EmailSender sender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

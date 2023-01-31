@@ -10,39 +10,51 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using fire_station_training_and_vehicle.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IUserStore<IdentityUser> _userStore;
-        private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
+        //private readonly UserManager<User> _user;
+        private readonly IUserStore<User> _userStore;
+        private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly FireFighterContext _context;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            IUserStore<IdentityUser> userStore,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<User> userManager,
+            IUserStore<User> userStore,
+            SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            FireFighterContext context
+          
+            )
         {
             _userManager = userManager;
             _userStore = userStore;
-            _emailStore = GetEmailStore();
+            _emailStore = (IUserEmailStore<User>)GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
+           
+            
+            
         }
 
         /// <summary>
@@ -89,42 +101,51 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
 
-            public string? FirstName { get; set; }
-            public string? LastName { get; set; }
+            [Required]
+            public string FirstName { get; set; }
+
+            public string LastName { get; set; }
             public string? Gender { get; set; }
-            public DateTime? DateOfBirth { get; set; }
-            public string? StreetAddress { get; set; }
-            public string? AptNumber { get; set; }
-            public string? UnitNumber { get; set; }
-            public string? Building { get; set; }
-            public string? City { get; set; }
-            public string? PostalCode { get; set; }
-            public string? Province { get; set; }
-        }
 
+            [Display(Name = "Date of Birth")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:MMMM dd, yyyy}")]
+            public DateTime? DateOfBirth { get; set; }
+            public bool? IsPasswordChanged { get; set; }
+            public string? Address { get; set; }
+
+           
+        }
+        public SelectList lstGender { get; set; }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            
             ReturnUrl = returnUrl;
+            lstGender = new SelectList(_context.Genders, "Type", "Type");
+            ViewData["Gender"] = new SelectList(_context.Genders,"Type","Type");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                ViewData["Gender"] = new SelectList(_context.Genders, "Type", "Type");
                 var user = CreateUser();
+
+               
+                user.FirstName = Input.FirstName;
+                user.LastName=Input.LastName;
+                user.DateOfBirth = Input.DateOfBirth;
+                user.Address = Input.Address;
+                user.Gender=Input.Gender;
+                user.IsPasswordChanged = false;
+               
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -135,17 +156,9 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    //var details = new User { FirstName = Input.FirstName, LastName = Input.LastName, Gender = Input.Gender, Address = Input.Address, DateOfBirth = Input.DateOfBirth, IsPasswordChanged = false };
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
+                    //await _user.UpdateAsync(details);
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
@@ -166,11 +179,11 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private User CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<User>();
             }
             catch
             {
@@ -180,13 +193,13 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
             }
         }
 
-        private IUserEmailStore<IdentityUser> GetEmailStore()
+        private IUserEmailStore<User> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<IdentityUser>)_userStore;
+            return (IUserEmailStore<User>)_userStore;
         }
     }
 }
