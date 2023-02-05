@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using fire_station_training_and_vehicle.CustomValidation;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace fire_station_training_and_vehicle.Models
 {
+    [ModelMetadataType(typeof(AspNetUserMetadata))]
     public partial class AspNetUser
     {
-        public AspNetUser()
-        {
-            AspNetUserClaims = new HashSet<AspNetUserClaim>();
-            AspNetUserLogins = new HashSet<AspNetUserLogin>();
-            AspNetUserTokens = new HashSet<AspNetUserToken>();
-            Roles = new HashSet<AspNetRole>();
-        }
-
+    }
+    public class AspNetUserMetadata
+    {
         public string Id { get; set; } = null!;
         public string? UserName { get; set; }
         public string? NormalizedUserName { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string? Email { get; set; }
         public string? NormalizedEmail { get; set; }
         public bool EmailConfirmed { get; set; }
@@ -28,20 +28,23 @@ namespace fire_station_training_and_vehicle.Models
         public DateTimeOffset? LockoutEnd { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
+        [Required]
+        [Display(Name = "First Name")]
         public string? FirstName { get; set; }
+        [Required]
+        [Display(Name = "Last Name")]
         public string? LastName { get; set; }
         public string? Gender { get; set; }
+        [Required]
+        [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MMMM dd, yyyy}")]
+        [FutureDateValidation]
         public DateTime? DateOfBirth { get; set; }
         public bool? IsPasswordChanged { get; set; }
+        [Required]
         public string? Address { get; set; }
         public int StationId { get; set; }
         public bool? IsDeleted { get; set; }
-
-        public virtual Station Station { get; set; } = null!;
-        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; }
-
-        public virtual ICollection<AspNetRole> Roles { get; set; }
     }
 }

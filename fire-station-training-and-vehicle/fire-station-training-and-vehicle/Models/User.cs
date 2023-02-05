@@ -13,5 +13,6 @@ namespace fire_station_training_and_vehicle.Models
         public DateTime? DateOfBirth { get; set; }
         public bool IsPasswordChanged { get; set; }
         public string? Address { get; set; }
+        public int? StationId { get; set; }
     }
 }

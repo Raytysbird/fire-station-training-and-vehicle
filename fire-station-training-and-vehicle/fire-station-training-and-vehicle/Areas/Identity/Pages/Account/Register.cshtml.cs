@@ -11,6 +11,7 @@ using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using fire_station_training_and_vehicle.Models;
+using fire_station_training_and_vehicle.CustomValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -108,20 +109,27 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
+
             [Required]
-
             public string? Gender { get; set; }
+        
+            public int StationId { get; set; }
+          
+            public String? Role { get; set; }
 
+            [Required]
             [Display(Name = "Date of Birth")]
             [DataType(DataType.Date)]
             [DisplayFormat(DataFormatString = "{0:MMMM dd, yyyy}")]
+            [FutureDateValidation]
             public DateTime? DateOfBirth { get; set; }
 
             public bool? IsPasswordChanged { get; set; }
             [Required]
             public string? Address { get; set; }
+            public SelectList lstGender { get; set; }
+          
 
-           
         }
         public SelectList lstGender { get; set; }
 
@@ -131,6 +139,8 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             lstGender = new SelectList(_context.Genders, "Type", "Type");
             ViewData["Gender"] = new SelectList(_context.Genders,"Type","Type");
+            ViewData["Role"] = new SelectList(_context.AspNetRoles, "Name", "Name");
+            ViewData["Station"] = new SelectList(_context.Stations, "Id", "Name");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
@@ -142,6 +152,9 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 ViewData["Gender"] = new SelectList(_context.Genders, "Type", "Type");
+                ViewData["Role"] = new SelectList(_context.AspNetRoles, "Id", "Name");
+                ViewData["Station"] = new SelectList(_context.Stations, "Id", "Name");
+                lstGender = new SelectList(_context.Genders, "Type", "Type");
                 var user = CreateUser();
 
                
@@ -151,8 +164,8 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
                 user.Address = Input.Address;
                 user.Gender=Input.Gender;
                 user.IsPasswordChanged = false;
-               
-
+                user.StationId = Input.StationId;
+                await _userManager.AddToRoleAsync(user,Input.Role);
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -160,7 +173,7 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    await _userManager.AddToRoleAsync(user, "Employee");
+                   
                     var userId = await _userManager.GetUserIdAsync(user);
                     //var details = new User { FirstName = Input.FirstName, LastName = Input.LastName, Gender = Input.Gender, Address = Input.Address, DateOfBirth = Input.DateOfBirth, IsPasswordChanged = false };
 

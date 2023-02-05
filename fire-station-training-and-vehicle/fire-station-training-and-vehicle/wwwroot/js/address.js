@@ -1,11 +1,6 @@
 ﻿function addressAutocomplete(containerElement, callback, options) {
-  // create input element
- 
- < !-- var inputElement = document.createElement("input"); -->
-  < !--inputElement.setAttribute("type", "text"); -->
-  < !--inputElement.setAttribute("placeholder", options.placeholder); -->
-  < !--containerElement.appendChild(inputElement); -->
-  var inputElement = document.getElementById("autocomplete-containerd");
+
+    var inputElement = document.getElementById("autocomplete-containerd");
     // add input field clear button
     var clearButton = document.createElement("div");
     clearButton.classList.add("clear-button");
@@ -54,8 +49,11 @@
         var promise = new Promise((resolve, reject) => {
             currentPromiseReject = reject;
 
-            var apiKey = "47f523a46b944b47862e39509a7833a9";
+            var apiKey = "c7c962e844bc465ea6fffc4a051163ae";
             var url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(currentValue)}&limit=5&apiKey=${apiKey}`;
+
+
+
 
             if (options.type) {
                 url += `&type=${options.type}`;
@@ -177,7 +175,7 @@
         buttonElement.appendChild(svgElement);
     }
 
-    /* Close the autocomplete dropdown when the document is clicked. 
+    /* Close the autocomplete dropdown when the document is clicked.
         Skip, when a user clicks on the input field */
     document.addEventListener("click", function (e) {
         if (e.target !== inputElement) {

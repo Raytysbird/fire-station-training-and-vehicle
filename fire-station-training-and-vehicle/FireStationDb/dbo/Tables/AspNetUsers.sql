@@ -18,9 +18,12 @@
     [LastName] VARCHAR(255) NULL, 
     [Gender] VARCHAR(255) NULL, 
     [DateOfBirth] DATE NULL, 
-    [IsPasswordChanged] BIT NOT NULL, 
+    [IsPasswordChanged] BIT NULL, 
     [Address] VARCHAR(MAX) NULL, 
-    CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
+    [StationId] INT NOT NULL, 
+    [IsDeleted] BIT NULL DEFAULT NULL, 
+    CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC),
+     CONSTRAINT [FKFire_Station302463] FOREIGN KEY (StationId) REFERENCES [dbo].[Station]([Id])
 );
 
 

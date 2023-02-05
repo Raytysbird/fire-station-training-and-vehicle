@@ -1,3 +1,4 @@
+C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\appsettings.Development.json
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\appsettings.json
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\fire-station-training-and-vehicle.staticwebassets.runtime.json
@@ -35,7 +36,6 @@ C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-ve
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\Microsoft.DiaSymReader.dll
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\Microsoft.DotNet.Scaffolding.Shared.dll
-C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
@@ -277,3 +277,4 @@ C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-ve
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\obj\Debug\net6.0\fire-station-training-and-vehicle.pdb
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\obj\Debug\net6.0\fire-station-training-and-vehicle.genruntimeconfig.cache
 C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\obj\Debug\net6.0\ref\fire-station-training-and-vehicle.dll
+C:\CPA10\Capstone\fire-station-training-and-vehicle\fire-station-training-and-vehicle\fire-station-training-and-vehicle\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
