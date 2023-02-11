@@ -3,10 +3,11 @@
 @{
     ViewData["Title"] = "Firefighter Details";
 }
-
+<h1>
+    Details for @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+</h1>
 <div class="row ms-5 g-0">
-    <h4>Details for @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName) </h4>
-    <hr />
+    
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Email)

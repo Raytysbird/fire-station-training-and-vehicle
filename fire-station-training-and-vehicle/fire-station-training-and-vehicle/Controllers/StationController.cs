@@ -73,6 +73,7 @@ namespace fire_station_training_and_vehicle.Controllers
                 station.IsDeleted = false;
                 _context.Add(station);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Station created successfully!!";
                 return RedirectToAction(nameof(Index));
             }
             return View(station);
@@ -99,7 +100,7 @@ namespace fire_station_training_and_vehicle.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Email,PhoneNumber")] Station station)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Email,IsDeleted,PhoneNumber")] Station station)
         {
             if (id != station.Id)
             {
@@ -111,7 +112,9 @@ namespace fire_station_training_and_vehicle.Controllers
                 try
                 {
                     _context.Update(station);
+
                     await _context.SaveChangesAsync();
+                    TempData["Success"] = "Station edited successfully!!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -129,28 +132,8 @@ namespace fire_station_training_and_vehicle.Controllers
             return View(station);
         }
 
-        // GET: Station/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Stations == null)
-            {
-                return NotFound();
-            }
-
-            var station = await _context.Stations
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (station == null)
-            {
-                return NotFound();
-            }
-
-            return View(station);
-        }
-
-        // POST: Station/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+       
+        public async Task<IActionResult> Delete(int id)
         {
             if (_context.Stations == null)
             {
@@ -159,7 +142,10 @@ namespace fire_station_training_and_vehicle.Controllers
             var station = await _context.Stations.FindAsync(id);
             if (station != null)
             {
-                _context.Stations.Remove(station);
+                station.IsDeleted=true;
+                _context.Update(station);
+                TempData["Success"] = "Station deleted successfully!!";
+
             }
             
             await _context.SaveChangesAsync();

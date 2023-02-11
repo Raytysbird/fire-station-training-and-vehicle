@@ -122,6 +122,7 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
             [DataType(DataType.Date)]
             [DisplayFormat(DataFormatString = "{0:MMMM dd, yyyy}")]
             [FutureDateValidation]
+            [AgeValidation]
             public DateTime? DateOfBirth { get; set; }
 
             public bool? IsPasswordChanged { get; set; }
@@ -156,8 +157,6 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
                 ViewData["Station"] = new SelectList(_context.Stations, "Id", "Name");
                 lstGender = new SelectList(_context.Genders, "Type", "Type");
                 var user = CreateUser();
-
-               
                 user.FirstName = Input.FirstName;
                 user.LastName=Input.LastName;
                 user.DateOfBirth = Input.DateOfBirth;
@@ -174,7 +173,7 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                   
+                    TempData["Success"] = "User created successfully!!";
                     var userId = await _userManager.GetUserIdAsync(user);
                     //var details = new User { FirstName = Input.FirstName, LastName = Input.LastName, Gender = Input.Gender, Address = Input.Address, DateOfBirth = Input.DateOfBirth, IsPasswordChanged = false };
 

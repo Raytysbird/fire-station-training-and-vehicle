@@ -1,49 +1,57 @@
 ﻿@model fire_station_training_and_vehicle.Models.Station
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Station";
 }
 
-<h1>Edit</h1>
+<h1>Edit Station @Model.Name</h1>
 
-<h4>Station</h4>
-<hr />
-<div class="row">
+<div class="row ms-5 g-0">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form class="row g-3" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
+            <div class="col-md-6">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+            <div class="form-group" hidden>
+                <label asp-for="IsDeleted" class="form-label"></label>
+                <input asp-for="IsDeleted" class="form-control" />
+                <span asp-validation-for="IsDeleted" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-6">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-12">
                 <label asp-for="PhoneNumber" class="control-label"></label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="col-12">
+                <div class="autocomplete-container" id="autocomplete-container">
+                    <label asp-for="Address"></label>
+                    <input asp-for="Address" class="form-control" class="autocomplete-container" id="autocomplete-containerd" type="text" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input type="submit" value="Save" class="btn btn2" />
             </div>
         </form>
     </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

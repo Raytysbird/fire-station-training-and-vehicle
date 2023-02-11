@@ -4,11 +4,9 @@
     ViewData["Title"] = "Station Details";
 }
 
-<h1>Details</h1>
+<h1>Details for @Html.DisplayFor(model => model.Name)</h1>
 
-<div class="row ms-5 g-0">
-    <h4>Details for @Html.DisplayFor(model => model.Name) </h4>
-    <hr />
+<div class="row ms-5 g-0"> 
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)

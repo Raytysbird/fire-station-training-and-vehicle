@@ -117,7 +117,9 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 try
                 {
+
                     await _userManager.UpdateAsync(user);
+                    TempData["Success"] = "User edited successfully!!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -147,6 +149,7 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 user.IsDeleted = true;
                 await _userManager.UpdateAsync(user);
+                TempData["Success"] = "User deleted successfully!!";
             }         
             return RedirectToAction(nameof(Index));
         }

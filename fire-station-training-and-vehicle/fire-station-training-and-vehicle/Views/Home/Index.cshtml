@@ -83,7 +83,7 @@
                     <h2>Featured title</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-primary">
-                       New user
+                        New user
                     </a>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 <h2>Featured title</h2>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                 <a asp-action="Index" asp-controller="User" class="btn btn-outline-success">
-                   All Users
+                    All Users
                 </a>
             </div>
         </div>
@@ -114,11 +114,11 @@
         </div>
     </div>
 </div>
-<div class="container px-4 py-5" id="hanging-icons">
-    <h2 class="pb-2 border-bottom">Station</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        @if (User.IsInRole("Admin"))
-        {
+@if (User.IsInRole("Admin"))
+{
+    <div class="container px-4 py-5" id="hanging-icons">
+        <h2 class="pb-2 border-bottom">Station</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
@@ -127,37 +127,38 @@
                     <h2>Featured title</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-action="Index" asp-controller="Station" class="btn btn-outline-primary">
-                        Stations
+                        All Stations
                     </a>
                 </div>
             </div>
-        }
-        <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
+
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
+                </div>
+                <div>
+                    <h2>Featured title</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Create" asp-controller="Station" class="btn btn-outline-primary">
+                        New Station
+                    </a>
+                </div>
             </div>
-            <div>
-                <h2>Featured title</h2>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a asp-action="Index" asp-controller="User" class="btn btn-outline-success">
-                    All Vehicles
-                </a>
-            </div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
-            </div>
-            <div>
-                <h2>Featured title</h2>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a href="#" class="btn btn-outline-dark">
-                    Maintenance Record
-                </a>
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
+                </div>
+                <div>
+                    <h2>Featured title</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a href="#" class="btn btn-outline-dark">
+                        Maintenance Record
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
 <div class="container px-4 py-5" id="hanging-icons">
     <h2 class="pb-2 border-bottom">Vehicles</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
@@ -184,7 +185,7 @@
                 <h2>Featured title</h2>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                 <a asp-action="Index" asp-controller="User" class="btn btn-outline-success">
-                   All Vehicles
+                    All Vehicles
                 </a>
             </div>
         </div>
@@ -240,7 +241,7 @@
                 <h2>Featured title</h2>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                 <a href="#" class="btn btn-outline-dark">
-                   Add credentials
+                    Add credentials
                 </a>
             </div>
         </div>
@@ -284,7 +285,7 @@
                 <h2>Featured title</h2>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                 <a href="#" class="btn btn-outline-dark">
-                  Training Report
+                    Training Report
                 </a>
             </div>
         </div>

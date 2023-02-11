@@ -14,40 +14,17 @@ namespace fire_station_training_and_vehicle.CustomValidation
         }
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value!=null)
+            if (value != null)
             {
                 DateTime today = DateTime.Now;
-                int year = int.Parse(today.ToString("yy"));
-                int month = int.Parse(today.ToString("MM"));
-                int date= int.Parse(today.ToString("dd"));
-
                 string ex = value.ToString();
-
                 DateTime inputDate = DateTime.Parse(ex);
-
-                int inputYear = int.Parse(inputDate.ToString("yy"));
-                int inputMonth = int.Parse(inputDate.ToString("MM"));
-                int inputDay = int.Parse(inputDate.ToString("dd"));
-                
-                
-              
-                if (inputYear > year)
-                {
-                    return new ValidationResult(string.Format(ErrorMessage,validationContext.DisplayName));
-                }
-                if (inputYear == year && inputMonth > month )
+                if (inputDate > today)
                 {
                     return new ValidationResult(string.Format(ErrorMessage, validationContext.DisplayName));
                 }
-                if (inputYear == year && inputMonth == month)
-                {
-                    if (inputDay > date)
-                    {
-                        return new ValidationResult(string.Format(ErrorMessage, validationContext.DisplayName));
-                    }
-                }
-            }       
-                 return ValidationResult.Success;
+            }
+            return ValidationResult.Success;
         }
     }
 }
