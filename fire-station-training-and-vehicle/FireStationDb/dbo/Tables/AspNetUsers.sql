@@ -22,8 +22,9 @@
     [Address] VARCHAR(MAX) NULL, 
     [StationId] INT NOT NULL, 
     [IsDeleted] BIT NULL DEFAULT NULL, 
-    CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC),
-     CONSTRAINT [FKFire_Station302463] FOREIGN KEY (StationId) REFERENCES [dbo].[Station]([Id])
+    CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC), 
+    CONSTRAINT [FK_AspNetUsers_ToTable] FOREIGN KEY ([StationId]) REFERENCES [Station]([Id])
+     
 );
 
 

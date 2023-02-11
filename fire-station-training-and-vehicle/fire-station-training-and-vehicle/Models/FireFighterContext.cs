@@ -92,7 +92,7 @@ namespace fire_station_training_and_vehicle.Models
                     .WithMany(p => p.AspNetUsers)
                     .HasForeignKey(d => d.StationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKFire_Station302463");
+                    .HasConstraintName("FK_AspNetUsers_ToTable");
 
                 entity.HasMany(d => d.Roles)
                     .WithMany(p => p.Users)
@@ -169,6 +169,8 @@ namespace fire_station_training_and_vehicle.Models
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)

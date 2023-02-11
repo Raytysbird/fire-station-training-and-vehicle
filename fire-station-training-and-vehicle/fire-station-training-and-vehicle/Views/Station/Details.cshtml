@@ -1,13 +1,13 @@
 ﻿@model fire_station_training_and_vehicle.Models.Station
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Station Details";
 }
 
 <h1>Details</h1>
 
-<div>
-    <h4>Station</h4>
+<div class="row ms-5 g-0">
+    <h4>Details for @Html.DisplayFor(model => model.Name) </h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -35,8 +35,9 @@
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
     </dl>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

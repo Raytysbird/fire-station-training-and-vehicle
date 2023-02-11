@@ -1,5 +1,14 @@
 ﻿@model IEnumerable<fire_station_training_and_vehicle.Models.AspNetUser>
-
+@using fire_station_training_and_vehicle.Services
+@{
+    Pagination pager = new Pagination();
+    int pageNo = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
 @{
     ViewData["Title"] = "Employees";
 }
@@ -50,5 +59,37 @@
             </tbody>
         </table>
     </div>
+    <div class="container">
+        @if (pager.TotalPages > 0)
+        {
+            <ul class="pagination">
+                @if (pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="User" asp-action="Index"  asp-route-pg="1">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="User" asp-action="Index"  asp-route-pg="@(pager.CurrentPage-1)">Previous</a>
+                    </li>
+                }
+                @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                {
+                    <li class="page-item @(pge==pager.CurrentPage?"active":"")">
+                        <a class="page-link" asp-controller="User" asp-action="Index"  asp-route-pg="@pge">@pge</a>
+                    </li>
+                }
+                @if (pager.CurrentPage < pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="User" asp-action="Index" asp-route-pg="@(pager.CurrentPage+1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="User" asp-action="Index"  asp-route-pg="@(pager.TotalPages)">Last</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+
 </div>
 

@@ -1,53 +1,86 @@
 ﻿@model IEnumerable<fire_station_training_and_vehicle.Models.Station>
+@using fire_station_training_and_vehicle.Services
+@{
+    Pagination pager = new Pagination();
+    int pageNo = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Stations";
 }
 
-<h1>Index</h1>
+<h1>Stations</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row ms-5 g-0">
+    <div class="col-lg-10">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                       
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        @if (pager.TotalPages > 0)
+        {
+            <ul class="pagination">
+                @if (pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Station" asp-action="Index" asp-route-pg="1">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Station" asp-action="Index" asp-route-pg="@(pager.CurrentPage-1)">Previous</a>
+                    </li>
+                }
+                @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                {
+                    <li class="page-item @(pge==pager.CurrentPage?"active":"")">
+                        <a class="page-link" asp-controller="Station" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                    </li>
+                }
+                @if (pager.CurrentPage < pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Station" asp-action="Index" asp-route-pg="@(pager.CurrentPage+1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Station" asp-action="Index" asp-route-pg="@(pager.TotalPages)">Last</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>

@@ -165,6 +165,7 @@ namespace fire_station_training_and_vehicle.Areas.Identity.Pages.Account
                 user.Gender=Input.Gender;
                 user.IsPasswordChanged = false;
                 user.StationId = Input.StationId;
+                user.IsDeleted = false;
                 await _userManager.AddToRoleAsync(user,Input.Role);
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

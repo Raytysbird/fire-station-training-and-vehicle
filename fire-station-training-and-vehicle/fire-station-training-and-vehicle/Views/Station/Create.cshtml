@@ -1,48 +1,64 @@
 ﻿@model fire_station_training_and_vehicle.Models.Station
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add  Station";
 }
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
 
-<h1>Create</h1>
+    .row {
+        background: white;
+        border-radius: 30px;
+    }
 
-<h4>Station</h4>
-<hr />
-<div class="row">
+    h1 {
+        margin-left: 20px;
+    }
+
+</style>
+<h1>Add Station</h1>
+
+
+<div class="row mx-4 my-4 no-gutters">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form class="row g-3" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="col-md-6">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+       
+            <div class="col-md-6">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div  class="col-12">
                 <label asp-for="PhoneNumber" class="control-label"></label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+              <div class="col-12">
+                <div class="autocomplete-container" id="autocomplete-container">
+                    <label asp-for="Address"></label>
+                    <input asp-for="Address" class="form-control" class="autocomplete-container" id="autocomplete-containerd" type="text" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input type="submit" value="Add Station" class="btn btn2" />
             </div>
         </form>
     </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

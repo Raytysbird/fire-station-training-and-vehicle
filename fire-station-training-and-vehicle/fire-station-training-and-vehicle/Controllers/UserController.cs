@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using fire_station_training_and_vehicle.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using fire_station_training_and_vehicle.Services;
 
 
 namespace fire_station_training_and_vehicle.Controllers
@@ -25,20 +26,28 @@ namespace fire_station_training_and_vehicle.Controllers
         }
         [Authorize(Roles = "Admin,Chief")]
         // GET: User
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pg = 1)
         {
             var userId = _userManager.GetUserId(HttpContext.User);
-
+            int pageSize = 9;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int rescCount = _context.AspNetUsers.Where(x => x.IsDeleted == false).Count();
+            var pager = new Pagination(rescCount, pg, pageSize);
+            int rescSkip = (pg - 1) * pageSize;
+            this.ViewBag.Pager = pager;
             if (User.IsInRole("Admin"))
             {
-                var fireFighters = await _context.AspNetUsers.Include(a => a.Station).ToListAsync();
+                var fireFighters = await _context.AspNetUsers.Include(a => a.Station).Where(x=>x.IsDeleted==false).Skip(rescSkip).Take(pager.PageSize).ToListAsync();
                 return View(fireFighters);
             }
            
             if (User.IsInRole("Chief"))
             {
                 var currentUser = _context.AspNetUsers.Where(x => x.Id == userId).FirstOrDefault();
-                var users=await _context.AspNetUsers.Include(a => a.Station).Where(x=>x.StationId== currentUser.StationId).ToListAsync();
+                var users=await _context.AspNetUsers.Include(a => a.Station).Where(x=>x.StationId== currentUser.StationId).Where(x => x.IsDeleted == false).Skip(rescSkip).Take(pager.PageSize).ToListAsync();
                 return View(users);
             }
             return View();
@@ -63,31 +72,6 @@ namespace fire_station_training_and_vehicle.Controllers
 
             return View(aspNetUser);
         }
-
-        // GET: User/Create
-        public IActionResult Create()
-        {
-            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Name");
-            return View();
-        }
-
-        // POST: User/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount,FirstName,LastName,Gender,DateOfBirth,IsPasswordChanged,Address,StationId,IsDeleted")] AspNetUser aspNetUser)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(aspNetUser);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Name", aspNetUser.StationId);
-            return View(aspNetUser);
-        }
-
         // GET: User/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
@@ -96,11 +80,12 @@ namespace fire_station_training_and_vehicle.Controllers
                 return NotFound();
             }
 
-            var aspNetUser = await _context.AspNetUsers.FindAsync(id);
+            var aspNetUser = await _userManager.FindByIdAsync(id);
             if (aspNetUser == null)
             {
                 return NotFound();
             }
+            ViewData["Gender"] = new SelectList(_context.Genders, "Type", "Type");
             ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Name", aspNetUser.StationId);
             return View(aspNetUser);
         }
@@ -110,19 +95,29 @@ namespace fire_station_training_and_vehicle.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount,FirstName,LastName,Gender,DateOfBirth,IsPasswordChanged,Address,StationId,IsDeleted")] AspNetUser aspNetUser)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount,FirstName,LastName,Gender,DateOfBirth,IsPasswordChanged,Address,StationId,IsDeleted")] User aspNetUser)
         {
             if (id != aspNetUser.Id)
             {
                 return NotFound();
             }
+            var user = await _userManager.FindByIdAsync(id);
+            user.FirstName = aspNetUser.FirstName;
+            user.LastName=aspNetUser.LastName;
+            user.Gender = aspNetUser.Gender;
+            user.DateOfBirth = aspNetUser.DateOfBirth;
+            user.Address = aspNetUser.Address;
+            user.StationId = aspNetUser.StationId;
 
+
+            ViewData["Gender"] = new SelectList(_context.Genders, "Type", "Type");
+            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Name", aspNetUser.StationId);
+           
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(aspNetUser);
-                    await _context.SaveChangesAsync();
+                    await _userManager.UpdateAsync(user);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -137,45 +132,22 @@ namespace fire_station_training_and_vehicle.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Name", aspNetUser.StationId);
+           
             return View(aspNetUser);
-        }
-
-        // GET: User/Delete/5
+        }  
         public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null || _context.AspNetUsers == null)
-            {
-                return NotFound();
-            }
-
-            var aspNetUser = await _context.AspNetUsers
-                .Include(a => a.Station)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (aspNetUser == null)
-            {
-                return NotFound();
-            }
-
-            return View(aspNetUser);
-        }
-
-        // POST: User/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.AspNetUsers == null)
             {
                 return Problem("Entity set 'FireFighterContext.AspNetUsers'  is null.");
             }
-            var aspNetUser = await _context.AspNetUsers.FindAsync(id);
-            if (aspNetUser != null)
+            //var aspNetUser = await _context.AspNetUsers.FindAsync(id);
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
             {
-                _context.AspNetUsers.Remove(aspNetUser);
-            }
-
-            await _context.SaveChangesAsync();
+                user.IsDeleted = true;
+                await _userManager.UpdateAsync(user);
+            }         
             return RedirectToAction(nameof(Index));
         }
 

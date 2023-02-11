@@ -15,6 +15,7 @@ namespace fire_station_training_and_vehicle.Models
         public string? Address { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
+        public bool? IsDeleted { get; set; }
 
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }

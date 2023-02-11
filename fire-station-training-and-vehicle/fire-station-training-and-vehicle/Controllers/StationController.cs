@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fire_station_training_and_vehicle.Models;
+using Microsoft.AspNetCore.Authorization;
+using fire_station_training_and_vehicle.Services;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StationController : Controller
     {
         private readonly FireFighterContext _context;
@@ -19,9 +22,19 @@ namespace fire_station_training_and_vehicle.Controllers
         }
 
         // GET: Station
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pg = 1)
         {
-              return View(await _context.Stations.ToListAsync());
+            int pageSize = 9;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int rescCount = _context.Stations.Where(x => x.IsDeleted == false).Count();
+            var pager = new Pagination(rescCount, pg, pageSize);
+            int rescSkip = (pg - 1) * pageSize;
+            this.ViewBag.Pager = pager;
+            var station=await _context.Stations.Where(x=>x.IsDeleted==false).Skip(rescSkip).Take(pager.PageSize).ToListAsync();
+            return View(station);
         }
 
         // GET: Station/Details/5
@@ -57,6 +70,7 @@ namespace fire_station_training_and_vehicle.Controllers
         {
             if (ModelState.IsValid)
             {
+                station.IsDeleted = false;
                 _context.Add(station);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
