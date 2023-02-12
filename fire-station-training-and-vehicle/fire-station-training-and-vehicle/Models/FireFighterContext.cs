@@ -22,7 +22,9 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
+        public virtual DbSet<Document> Documents { get; set; } = null!;
         public virtual DbSet<Gender> Genders { get; set; } = null!;
+        public virtual DbSet<RequestType> RequestTypes { get; set; } = null!;
         public virtual DbSet<Station> Stations { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -147,6 +149,32 @@ namespace fire_station_training_and_vehicle.Models
                     .HasForeignKey(d => d.UserId);
             });
 
+            modelBuilder.Entity<Document>(entity =>
+            {
+                entity.ToTable("Document");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name).IsUnicode(false);
+
+                entity.Property(e => e.Path).IsUnicode(false);
+
+                entity.Property(e => e.UserId).HasMaxLength(450);
+
+                entity.HasOne(d => d.Type)
+                    .WithMany(p => p.Documents)
+                    .HasForeignKey(d => d.TypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Document_ToTYpe");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Documents)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_Document_ToTable");
+            });
+
             modelBuilder.Entity<Gender>(entity =>
             {
                 entity.ToTable("Gender");
@@ -156,6 +184,11 @@ namespace fire_station_training_and_vehicle.Models
                 entity.Property(e => e.Type)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<RequestType>(entity =>
+            {
+                entity.ToTable("RequestType");
             });
 
             modelBuilder.Entity<Station>(entity =>

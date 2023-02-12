@@ -1,0 +1,15 @@
+﻿@model IEnumerable<fire_station_training_and_vehicle.Models.Document>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="files" multiple />
+    <button type="submit">Upload</button>
+</form>
