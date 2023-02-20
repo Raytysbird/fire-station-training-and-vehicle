@@ -29,6 +29,7 @@ namespace fire_station_training_and_vehicle.Controllers
         public async Task<IActionResult> Index(int pg = 1)
         {
             var userId = _userManager.GetUserId(HttpContext.User);
+            ViewBag.UserId = userId;
             int pageSize = 9;
             if (pg < 1)
             {
@@ -50,6 +51,7 @@ namespace fire_station_training_and_vehicle.Controllers
                 var users=await _context.AspNetUsers.Include(a => a.Station).Where(x=>x.StationId== currentUser.StationId).Where(x => x.IsDeleted == false).Skip(rescSkip).Take(pager.PageSize).ToListAsync();
                 return View(users);
             }
+           
             return View();
 
         }

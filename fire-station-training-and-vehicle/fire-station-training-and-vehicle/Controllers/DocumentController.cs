@@ -26,7 +26,7 @@ namespace fire_station_training_and_vehicle.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(HttpContext.User);
-            var documents = await _context.Documents.Include(d => d.User).Include(x => x.RequestType).Where(x => x.UserId == userId).Where(x=>x.Status==true).ToListAsync();
+            var documents = await _context.Documents.Include(d => d.User).Include(x => x.RequestType).Where(x => x.UserId == userId).ToListAsync();
             return View(documents);
         }
         public async Task<IActionResult> Download(string fileName)

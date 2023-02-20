@@ -31,29 +31,30 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                   
-                    <tr >
+                    @if (item.Id != ViewBag.UserId)
+                    {
+                        <tr >
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LastName)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Station.Name)
-                        </td>
-                        <td>
-                            <a class="link-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a class="link-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Station.Name)
+                            </td>
+                            <td>
+                                <a class="link-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a class="link-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
                 }
 
             </tbody>
