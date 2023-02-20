@@ -163,10 +163,9 @@ namespace fire_station_training_and_vehicle.Models
 
                 entity.Property(e => e.UserId).HasMaxLength(450);
 
-                entity.HasOne(d => d.Type)
+                entity.HasOne(d => d.RequestType)
                     .WithMany(p => p.Documents)
-                    .HasForeignKey(d => d.TypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasForeignKey(d => d.RequestTypeId)
                     .HasConstraintName("FK_Document_ToTYpe");
 
                 entity.HasOne(d => d.User)
@@ -189,6 +188,10 @@ namespace fire_station_training_and_vehicle.Models
             modelBuilder.Entity<RequestType>(entity =>
             {
                 entity.ToTable("RequestType");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Station>(entity =>

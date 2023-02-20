@@ -11,7 +11,7 @@ namespace fire_station_training_and_vehicle.Models
         }
 
         public int Id { get; set; }
-        public int? Name { get; set; }
+        public string? Name { get; set; }
 
         public virtual ICollection<Document> Documents { get; set; }
     }

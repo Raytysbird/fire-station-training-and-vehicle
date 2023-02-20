@@ -1,0 +1,54 @@
+﻿@model fire_station_training_and_vehicle.Models.Document
+
+@{
+    ViewData["Title"] = "Request Documents";
+}
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .row {
+        background: white;
+        border-radius: 30px;
+    }
+
+    h1 {
+        margin-left: 20px;
+    }
+
+</style>
+<h1>Request document</h1>
+
+
+<div class="row mx-4 my-4 no-gutters">
+    <div class="col-md-4">
+        <form class="row g-3" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+             <div class="col-md-6">
+                <label asp-for="RequestTypeId" class="form-label"></label>
+                <select asp-for="RequestTypeId" class="form-control" asp-items="ViewBag.TypeId"></select>
+                <span asp-validation-for="RequestTypeId" class="text-danger"></span>
+            </div>
+            <div class="col-md-12">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="6" cols="6" > </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <input type="submit" value="Submit Request" class="btn btn2" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -96,8 +96,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/Document/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/Document/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/Document/Request.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcUmVxdWVzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/Home/Index.cshtml]

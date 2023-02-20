@@ -1,0 +1,63 @@
+﻿@model IEnumerable<fire_station_training_and_vehicle.Models.Document>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .row {
+        background: white;
+        border-radius: 30px;
+    }
+</style>
+<h1>Document Requests</h1>
+<div class="row mx-4 my-4 no-gutters">
+    @if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@item.RequestType.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><a href="mailto:@item.User.Email">@item.User.Email</a></h6>
+                    <p class="card-text">Name:@item.User.FirstName @item.User.LastName <br />@item.Description</p>
+                    <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadModal">Upload</a>
+                </div>
+            </div>
+            <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="uploadModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form asp-action="Upload" method="post" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <input type="file" name="files" multiple />
+                                <input type="hidden" name="requestId" value="@item.Id" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3 id="no_reviews">No New document requests</h3>
+    }
+
+</div>
+
+<!-- Modal -->
