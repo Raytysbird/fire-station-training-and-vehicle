@@ -26,6 +26,9 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<Gender> Genders { get; set; } = null!;
         public virtual DbSet<RequestType> RequestTypes { get; set; } = null!;
         public virtual DbSet<Station> Stations { get; set; } = null!;
+        public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
+        public virtual DbSet<VehicleCatalogue> VehicleCatalogues { get; set; } = null!;
+        public virtual DbSet<VehicleType> VehicleTypes { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -214,6 +217,81 @@ namespace fire_station_training_and_vehicle.Models
 
                 entity.Property(e => e.PhoneNumber)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Vehicle>(entity =>
+            {
+                entity.ToTable("Vehicle");
+
+                entity.Property(e => e.VehicleId).HasColumnName("Vehicle_Id");
+
+                entity.Property(e => e.LicenceExpiry).HasColumnType("date");
+
+                entity.Property(e => e.LicencePlate)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Make)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Model)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.VehicleStatus)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Station)
+                    .WithMany(p => p.Vehicles)
+                    .HasForeignKey(d => d.StationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Vehicle_2");
+
+                entity.HasOne(d => d.VehicleType)
+                    .WithMany(p => p.Vehicles)
+                    .HasForeignKey(d => d.VehicleTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Vehicle_1");
+            });
+
+            modelBuilder.Entity<VehicleCatalogue>(entity =>
+            {
+                entity.HasKey(e => e.DefaultTypeId)
+                    .HasName("PK__VehicleC__08498062C07B587B");
+
+                entity.ToTable("VehicleCatalogue");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MaximumGvr).HasColumnName("MaximumGVR");
+
+                entity.Property(e => e.TypicalUse)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VehicleType>(entity =>
+            {
+                entity.ToTable("VehicleType");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MaximumGvr).HasColumnName("MaximumGVR");
+
+                entity.Property(e => e.TypicalUse)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
             });
 

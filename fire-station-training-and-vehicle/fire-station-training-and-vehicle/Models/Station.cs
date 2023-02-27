@@ -8,6 +8,7 @@ namespace fire_station_training_and_vehicle.Models
         public Station()
         {
             AspNetUsers = new HashSet<AspNetUser>();
+            Vehicles = new HashSet<Vehicle>();
         }
 
         public int Id { get; set; }
@@ -18,5 +19,6 @@ namespace fire_station_training_and_vehicle.Models
         public bool? IsDeleted { get; set; }
 
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }
