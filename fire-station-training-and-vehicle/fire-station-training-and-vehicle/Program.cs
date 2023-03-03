@@ -35,6 +35,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
       
 builder.Services.AddTransient<EmailSender>();
 
+
 //builder.Services.AddControllersWithViews().AddRazorPagesOptions(options =>
 //{
 //    options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");

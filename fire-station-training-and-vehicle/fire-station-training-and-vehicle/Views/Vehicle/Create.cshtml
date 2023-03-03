@@ -1,0 +1,356 @@
+﻿@model fire_station_training_and_vehicle.Models.Vehicle
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .row {
+        background: white;
+        border-radius: 30px;
+    }
+
+    h1 {
+        margin-left: 20px;
+    }
+
+</style>
+<h1>Add Vehicle</h1>
+
+<div class="row mx-4 my-4 no-gutters">
+    <div class="col-md-6">
+        <form method="post" id="frmVehicle">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-6">
+                    <label asp-for="VehicleTypeId" class="control-label"></label>
+                    <select asp-for="VehicleTypeId" class="form-control" onchange="getVehicleType();" id="vehicleType" asp-items="ViewBag.DefaultTypeId"><option value="">----Select Type----</option></select>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="StationId" class="control-label"></label>
+                    <select asp-for="StationId" class="form-control" asp-items="ViewBag.StationId"></select>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="LicencePlate" class="control-label"></label>
+                    <input asp-for="LicencePlate" class="form-control" />
+                    <span asp-validation-for="LicencePlate" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="LicenceExpiry" class="control-label"></label>
+                    <input asp-for="LicenceExpiry" class="form-control" />
+                    <span asp-validation-for="LicenceExpiry" class="text-danger"></span>
+                </div>
+                <div class="col-md-6" hidden>
+                    <label asp-for="VehicleStatus" class="control-label"></label>
+                    <input asp-for="VehicleStatus" class="form-control" />
+                    <span asp-validation-for="VehicleStatus" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Make" class="control-label"></label>
+                    <input asp-for="Make" class="form-control" />
+                    <span asp-validation-for="Make" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Model" class="control-label"></label>
+                    <input asp-for="Model" class="form-control" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Year" class="control-label"></label>
+                    <input asp-for="Year" class="form-control" />
+                    <span asp-validation-for="Year" class="text-danger"></span>
+                </div>
+                <div class="col-md-6" hidden>
+                    <label asp-for="IsDeleted" class="control-label"></label>
+                    <input asp-for="IsDeleted" class="form-control" />
+                    <span asp-validation-for="IsDeleted" class="text-danger"></span>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="col-6 p-2">
+                        <button type="submit" onclick="submitForm();" class="btn btn2">Add Vehicle</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-md-6 hide types">
+        <form method="post" id="frmVehicleType">
+            <input type="text" hidden id="typeId" class="form-control" />
+            <div class="row ">
+                <div class="col-md-6">
+                    <label class="control-label">Tank Minimum Capacity</label>
+                    <input type="text" id="tankCapacity" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label">Hose 1 1/2 inch</label>
+                    <input type="text" id="hoseOneHalf" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label">Hose 1 inch</label>
+                    <input type="text" id="hoseOne" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label">Hose 2 1/2 inch</label>
+                    <input type="text" id="hoseTwoHalf" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label">Maximum GVR</label>
+                    <input type="text" id="maximumGvr" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label">Minimum Personel</label>
+                    <input type="text" id="minPersonel" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label">Pump Minimum Flow</label>
+                    <input type="text" id="pumpMinimumFlow" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label">Rated Pressure</label>
+                    <input type="text" id="ratedPressure" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label">Typical Use</label>
+                    <input type="text" id="typicalUse" class="form-control" />
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="heavyRescue">
+                        <label class="form-check-label" for="heavyRescue">
+                            Heavy Rescue
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ladders">
+                        <label class="form-check-label" for="ladders">
+                            Ladders
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="masterStream">
+                        <label class="form-check-label" for="masterStream">
+                            Master Stream
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="pumpAndRoll">
+                        <label class="form-check-label" for="pumpAndRoll">
+                            Pump and Roll
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="turntable">
+                        <label class="form-check-label" for="turntable">
+                            Turntable
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="wildLandRescue">
+                        <label class="form-check-label" for="wildLandRescue">
+                            Wild Land Rescue
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="structure">
+                        <label class="form-check-label" for="structure">
+                            Structure
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function getVehicleType() {
+            $(".types").removeClass("hide");
+
+            var id = $('#vehicleType').val();
+            $('#typeId').val(id);
+            $.ajax({
+                url: '/Vehicle/GetDefaultTypes/' + id,
+                type: 'GET',
+                success: function (data) {
+
+                    $('#tankCapacity').val(data.tankMinimumCapacity);
+                    $('#hoseOneHalf').val(data.hoseOneHalfInch);
+                    $('#hoseOne').val(data.hoseOneInch);
+                    $('#hoseTwoHalf').val(data.hoseTwoHalfInch);
+                    $('#maximumGvr').val(data.maximumGvr);
+                    $('#minPersonel').val(data.minPersonel);
+                    $('#pumpMinimumFlow').val(data.pumpMinimumFlow);
+                    $('#ratedPressure').val(data.ratedPressure);
+                    $('#typicalUse').val(data.typicalUse);
+                    if (data.heavyRescue) {
+                        $('#heavyRescue').prop('checked', true);
+                    } else {
+                        $('#heavyRescue').prop('checked', false);
+                    }
+
+                    if (data.structure) {
+                        $('#structure').prop('checked', true);
+                    } else {
+                        $('#structure').prop('checked', false);
+                    }
+
+                    if (data.ladders) {
+                        $('#ladders').prop('checked', true);
+                    } else {
+                        $('#ladders').prop('checked', false);
+                    }
+
+                    if (data.masterStream) {
+                        $('#masterStream').prop('checked', true);
+                    } else {
+                        $('#masterStream').prop('checked', false);
+                    }
+
+                    if (data.pumpAndRoll) {
+                        $('#pumpAndRoll').prop('checked', true);
+                    } else {
+                        $('#pumpAndRoll').prop('checked', false);
+                    }
+
+                    if (data.turntable) {
+                        $('#turntable').prop('checked', true);
+                    } else {
+                        $('#turntable').prop('checked', false);
+                    }
+
+                    if (data.wildLandRescue) {
+                        $('#wildLandRescue').prop('checked', true);
+                    } else {
+                        $('#wildLandRescue').prop('checked', false);
+                    }
+                },
+                error: function () {
+                    alert('Error occurred while calling the API.');
+                }
+            });
+
+
+        }
+        function submitForm() {
+            var data = $("#frmVehicleType").serialize();
+            alert(data);
+            $.ajax({
+                url: '/Vehicle/CreateType/',
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+               
+                data: data,
+                success: function (response) {
+                    if (response.success) {
+                        alert('Record created successfully.');
+                        // Do any additional actions if needed.
+                    } else {
+                        alert('Failed to create record.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Error: ' + xhr.responseText);
+                }
+            });
+
+        }
+                //$(function () {
+                //    $('#btnSubmitForm').click(function () {
+                //        var form = $('#frmVehicleType'); // Get the form element
+                //        var formData = new FormData(form); // Create a FormData object from the form data
+                //        alert(formData);
+                //        $.ajax({
+                //            url: '/Vehicle/CreateType/',
+                //            type: 'POST',
+                //            data: formData,
+
+                //            success: function (result) {
+                //                alert('Data submitted successfully!');
+                //            },
+                //            error: function (error) {
+                //                alert('Error: ' + error.responseText);
+                //            }
+                //        });
+                //    });
+                //});
+                //function submitVehicle() {
+
+                //    var data = $("#frmVehicleType").serialize();
+                //    alert(data);
+
+                //    //if (!$("#frmVehicle").valid() || !$("#frmVehicleType").valid()) {
+                //    //    return false;
+                //    //}
+
+                //    $.ajax({
+                //        url: '/Vehicle/CreateType/',
+                //        type: 'POST',
+                //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                //        datatype: 'json',
+                //        data: data,
+                //        success: function (response) {
+                //            if (response.success) {
+                //                alert('Record created successfully.');
+                //                // Do any additional actions if needed.
+                //            } else {
+                //                alert('Failed to create record.');
+                //            }
+                //        },
+                //        error: function (xhr, status, error) {
+                //            alert('Error: ' + xhr.responseText);
+                //        }
+                //    });
+                //}
+
+    </script>
+    }
+<style>
+    .hide {
+        display: none;
+    }
+
+    #btnSubmit {
+        width: 200px;
+        height: 50px;
+        font-size: 20px;
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+

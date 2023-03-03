@@ -1,0 +1,118 @@
+﻿@model fire_station_training_and_vehicle.Models.VehicleType
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>VehicleType</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TypeId" class="control-label"></label>
+                <input asp-for="TypeId" class="form-control" />
+                <span asp-validation-for="TypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TankMinimumCapacity" class="control-label"></label>
+                <input asp-for="TankMinimumCapacity" class="form-control" />
+                <span asp-validation-for="TankMinimumCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeavyRescue" class="control-label"></label>
+                <input asp-for="HeavyRescue" class="form-control" />
+                <span asp-validation-for="HeavyRescue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoseOneHalfInch" class="control-label"></label>
+                <input asp-for="HoseOneHalfInch" class="form-control" />
+                <span asp-validation-for="HoseOneHalfInch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoseOneInch" class="control-label"></label>
+                <input asp-for="HoseOneInch" class="form-control" />
+                <span asp-validation-for="HoseOneInch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoseTwoHalfInch" class="control-label"></label>
+                <input asp-for="HoseTwoHalfInch" class="form-control" />
+                <span asp-validation-for="HoseTwoHalfInch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ladders" class="control-label"></label>
+                <input asp-for="Ladders" class="form-control" />
+                <span asp-validation-for="Ladders" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MasterStream" class="control-label"></label>
+                <input asp-for="MasterStream" class="form-control" />
+                <span asp-validation-for="MasterStream" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaximumGvr" class="control-label"></label>
+                <input asp-for="MaximumGvr" class="form-control" />
+                <span asp-validation-for="MaximumGvr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinPersonel" class="control-label"></label>
+                <input asp-for="MinPersonel" class="form-control" />
+                <span asp-validation-for="MinPersonel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PumpAndRoll" class="control-label"></label>
+                <input asp-for="PumpAndRoll" class="form-control" />
+                <span asp-validation-for="PumpAndRoll" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PumpMinimumFlow" class="control-label"></label>
+                <input asp-for="PumpMinimumFlow" class="form-control" />
+                <span asp-validation-for="PumpMinimumFlow" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RatedPressure" class="control-label"></label>
+                <input asp-for="RatedPressure" class="form-control" />
+                <span asp-validation-for="RatedPressure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Turntable" class="control-label"></label>
+                <input asp-for="Turntable" class="form-control" />
+                <span asp-validation-for="Turntable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypicalUse" class="control-label"></label>
+                <input asp-for="TypicalUse" class="form-control" />
+                <span asp-validation-for="TypicalUse" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WildLandRescue" class="control-label"></label>
+                <input asp-for="WildLandRescue" class="form-control" />
+                <span asp-validation-for="WildLandRescue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Structure" class="control-label"></label>
+                <input asp-for="Structure" class="form-control" />
+                <span asp-validation-for="Structure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

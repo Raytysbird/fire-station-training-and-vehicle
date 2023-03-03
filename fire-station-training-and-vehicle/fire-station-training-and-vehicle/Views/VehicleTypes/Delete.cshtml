@@ -1,0 +1,129 @@
+﻿@model fire_station_training_and_vehicle.Models.VehicleType
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VehicleType</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TypeId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TypeId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TankMinimumCapacity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TankMinimumCapacity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HeavyRescue)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HeavyRescue)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoseOneHalfInch)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoseOneHalfInch)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoseOneInch)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoseOneInch)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoseTwoHalfInch)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoseTwoHalfInch)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ladders)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ladders)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MasterStream)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MasterStream)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaximumGvr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaximumGvr)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MinPersonel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MinPersonel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PumpAndRoll)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PumpAndRoll)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PumpMinimumFlow)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PumpMinimumFlow)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RatedPressure)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RatedPressure)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Turntable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Turntable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TypicalUse)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TypicalUse)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WildLandRescue)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WildLandRescue)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Structure)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Structure)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="VehicleTypeId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
