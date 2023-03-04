@@ -25,7 +25,7 @@
 
 <div class="row mx-4 my-4 no-gutters">
     <div class="col-md-6">
-        <form method="post" id="frmVehicle">
+        <form method="post" asp-action="Create" id="frmVehicle">
             <div class="row">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="col-md-6">
@@ -51,11 +51,7 @@
                     <input asp-for="LicenceExpiry" class="form-control" />
                     <span asp-validation-for="LicenceExpiry" class="text-danger"></span>
                 </div>
-                <div class="col-md-6" hidden>
-                    <label asp-for="VehicleStatus" class="control-label"></label>
-                    <input asp-for="VehicleStatus" class="form-control" />
-                    <span asp-validation-for="VehicleStatus" class="text-danger"></span>
-                </div>
+              
                 <div class="col-md-6">
                     <label asp-for="Make" class="control-label"></label>
                     <input asp-for="Make" class="form-control" />
@@ -86,49 +82,60 @@
     </div>
 
 
-    <div class="col-md-6 hide types">
-        <form method="post" id="frmVehicleType">
-            <input type="text" hidden id="typeId" class="form-control" />
+    <div class="col-md-6 types">
+        <form id="frmVehicleType">
+            <input type="text" hidden id="typeId" name="typeId" class="form-control" />
+          
             <div class="row ">
                 <div class="col-md-6">
-                    <label class="control-label">Tank Minimum Capacity</label>
-                    <input type="text" id="tankCapacity" class="form-control" />
+                    <label class="control-label" for="tankCapacity">Tank Minimum Capacity</label>
+                    <input type="text" id="tankCapacity" name="tankMinimumCapacity" data-val="true" data-val-required="Tank Minimum Capacity is required." class="form-control" />
+                    <span data-valmsg-for="tankMinimumCapacity" data-valmsg-replace="true" class="text-danger" />
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Hose 1 1/2 inch</label>
-                    <input type="text" id="hoseOneHalf" class="form-control" />
+                    <input type="text" id="hoseOneHalf" name="hoseOneHalfInch" data-val="true" data-val-required="Hose 1 1/2 inch is required." class="form-control" />
+                    <span data-valmsg-for="hoseOneHalfInch" data-valmsg-replace="true" class="text-danger" />
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Hose 1 inch</label>
-                    <input type="text" id="hoseOne" class="form-control" />
+                    <input type="text" id="hoseOne" name="hoseOneInch" data-val="true" data-val-required="Hose 1 inch is required." class="form-control" />
+                    <span data-valmsg-for="hoseOneInch" data-valmsg-replace="true" class="text-danger" />
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Hose 2 1/2 inch</label>
-                    <input type="text" id="hoseTwoHalf" class="form-control" />
+                    <input type="text" id="hoseTwoHalf" name="hoseTwoHalfInch" data-val="true" data-val-required="Hose 2 1/2 inch is required." class="form-control" />
+                    <span data-valmsg-for="hoseTwoHalfInch" data-valmsg-replace="true" class="text-danger" />
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Maximum GVR</label>
-                    <input type="text" id="maximumGvr" class="form-control" />
+                    <input type="text" id="maximumGvr" name="maximumGvr" data-val="true" data-val-required="Maximum GVR is required." class="form-control" />
+                    <span data-valmsg-for="maximumGvr" data-valmsg-replace="true" class="text-danger" />
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Minimum Personel</label>
-                    <input type="text" id="minPersonel" class="form-control" />
+                    <input type="text" id="minPersonel" name="minPersonel" data-val="true" data-val-required="Minimum Personel is required." class="form-control" />
+                    <span data-valmsg-for="minPersonel" data-valmsg-replace="true" class="text-danger" />
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Pump Minimum Flow</label>
-                    <input type="text" id="pumpMinimumFlow" class="form-control" />
+                    <input type="text" id="pumpMinimumFlow" name="pumpMinimumFlow" data-val-required="Pump Minimum Flow is required." data-val="true" class="form-control" />
+                    <span data-valmsg-for="pumpMinimumFlow" data-valmsg-replace="true" class="text-danger" />
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Rated Pressure</label>
-                    <input type="text" id="ratedPressure" class="form-control" />
+                    <input type="text" id="ratedPressure" name="ratedPressure" data-val="true" data-val-required="Rated Pressure is required." class="form-control" />
+                     <span data-valmsg-for="ratedPressure" data-valmsg-replace="true" class="text-danger" />
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Typical Use</label>
-                    <input type="text" id="typicalUse" class="form-control" />
+                    <input type="text" id="typicalUse" name="typicalUse" data-val="true" data-val-required="Typical Use is required." class="form-control" />
+                    <span data-valmsg-for="typicalUse" data-valmsg-replace="true" class="text-danger" />
                 </div>
+
                 <div class="col-md-6 mt-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="heavyRescue">
+                        <input class="form-check-input" type="checkbox" value="" name="heavyRescue" id="heavyRescue">
                         <label class="form-check-label" for="heavyRescue">
                             Heavy Rescue
                         </label>
@@ -137,7 +144,7 @@
 
                 <div class="col-md-6 mt-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="ladders">
+                        <input class="form-check-input" type="checkbox" value="" name="ladders" id="ladders">
                         <label class="form-check-label" for="ladders">
                             Ladders
                         </label>
@@ -145,7 +152,7 @@
                 </div>
                 <div class="col-md-6 mt-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="masterStream">
+                        <input class="form-check-input" type="checkbox" value="" name="masterStream" id="masterStream">
                         <label class="form-check-label" for="masterStream">
                             Master Stream
                         </label>
@@ -154,7 +161,7 @@
 
                 <div class="col-md-6 mt-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="pumpAndRoll">
+                        <input class="form-check-input" type="checkbox" value="" name="pumpAndRoll" id="pumpAndRoll">
                         <label class="form-check-label" for="pumpAndRoll">
                             Pump and Roll
                         </label>
@@ -163,7 +170,7 @@
 
                 <div class="col-md-6 mt-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="turntable">
+                        <input class="form-check-input" type="checkbox" value="" name="turntable" id="turntable">
                         <label class="form-check-label" for="turntable">
                             Turntable
                         </label>
@@ -172,7 +179,7 @@
 
                 <div class="col-md-6 mt-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="wildLandRescue">
+                        <input class="form-check-input" type="checkbox" value="" name="wildLandRescue" id="wildLandRescue">
                         <label class="form-check-label" for="wildLandRescue">
                             Wild Land Rescue
                         </label>
@@ -180,13 +187,18 @@
                 </div>
                 <div class="col-md-6 mt-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="structure">
+                        <input class="form-check-input" type="checkbox" value="" name="structure" id="structure">
                         <label class="form-check-label" for="structure">
                             Structure
                         </label>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <label class="control-label">Special Notes</label>
+                    <textarea id="description" name="description" class="form-control" rows="6" cols="3"> </textarea>
+                </div>
             </div>
+
         </form>
     </div>
 </div>
@@ -269,76 +281,69 @@
 
         }
         function submitForm() {
-            var data = $("#frmVehicleType").serialize();
+            var form = $("#frmVehicleType");
+            if (!form.valid()) {
+                return false;
+            }
+            var description = $("textarea[name='description']").val();
+            var tankMinimumCapacity = $("input[name='tankMinimumCapacity']").val();
+            var hoseOneHalfInch = $("input[name='hoseOneHalfInch']").val();
+            var hoseOneInch = $("input[name='hoseOneInch']").val();
+            var hoseTwoHalfInch = $("input[name='hoseTwoHalfInch']").val();
+            var minPersonel = $("input[name='minPersonel']").val();
+            var maximumGvr = $("input[name='maximumGvr']").val();
+            var pumpMinimumFlow = $("input[name='pumpMinimumFlow']").val();
+            var ratedPressure = $("input[name='ratedPressure']").val();
+            var typicalUse = $("input[name='typicalUse']").val();
+            var ratedPressure = $("input[name='ratedPressure']").val();
+            var typeId = $("input[name='typeId']").val();
+            var heavyRescue = $("input[name='heavyRescue']").prop("checked");
+            var masterStream = $("input[name='masterStream']").prop("checked");
+            var pumpAndRoll = $("input[name='pumpAndRoll']").prop("checked");
+            var turntable = $("input[name='turntable']").prop("checked");
+            var wildLandRescue = $("input[name='wildLandRescue']").prop("checked");
+            var structure = $("input[name='structure']").prop("checked");
+            var ladders = $("input[name='ladders']").prop("checked");
+
+            var data = {
+                description: description,
+                typeId: typeId,
+                tankMinimumCapacity: tankMinimumCapacity,
+                hoseOneHalfInch: hoseOneHalfInch,
+                hoseOneInch: hoseOneInch,
+                hoseTwoHalfInch: hoseTwoHalfInch,
+                minPersonel: minPersonel,
+                maximumGvr: maximumGvr,
+                pumpMinimumFlow: pumpMinimumFlow,
+                ratedPressure: ratedPressure,
+                typicalUse: typicalUse,
+                ratedPressure: ratedPressure,
+                heavyRescue: heavyRescue,
+                masterStream: masterStream,
+                pumpAndRoll: pumpAndRoll,
+                turntable: turntable,
+                wildLandRescue: wildLandRescue,
+                structure: structure,
+                ladders: ladders
+            };
             alert(data);
             $.ajax({
-                url: '/Vehicle/CreateType/',
                 type: 'POST',
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-               
-                data: data,
+                data: JSON.stringify(data),
+                url: '/Vehicle/CreateType/',
+                contentType: "application/json",
                 success: function (response) {
                     if (response.success) {
                         alert('Record created successfully.');
-                        // Do any additional actions if needed.
+                       
                     } else {
-                        alert('Failed to create record.');
+                        
                     }
                 },
                 error: function (xhr, status, error) {
-                    alert('Error: ' + xhr.responseText);
                 }
             });
-
         }
-                //$(function () {
-                //    $('#btnSubmitForm').click(function () {
-                //        var form = $('#frmVehicleType'); // Get the form element
-                //        var formData = new FormData(form); // Create a FormData object from the form data
-                //        alert(formData);
-                //        $.ajax({
-                //            url: '/Vehicle/CreateType/',
-                //            type: 'POST',
-                //            data: formData,
-
-                //            success: function (result) {
-                //                alert('Data submitted successfully!');
-                //            },
-                //            error: function (error) {
-                //                alert('Error: ' + error.responseText);
-                //            }
-                //        });
-                //    });
-                //});
-                //function submitVehicle() {
-
-                //    var data = $("#frmVehicleType").serialize();
-                //    alert(data);
-
-                //    //if (!$("#frmVehicle").valid() || !$("#frmVehicleType").valid()) {
-                //    //    return false;
-                //    //}
-
-                //    $.ajax({
-                //        url: '/Vehicle/CreateType/',
-                //        type: 'POST',
-                //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //        datatype: 'json',
-                //        data: data,
-                //        success: function (response) {
-                //            if (response.success) {
-                //                alert('Record created successfully.');
-                //                // Do any additional actions if needed.
-                //            } else {
-                //                alert('Failed to create record.');
-                //            }
-                //        },
-                //        error: function (xhr, status, error) {
-                //            alert('Error: ' + xhr.responseText);
-                //        }
-                //    });
-                //}
-
     </script>
     }
 <style>

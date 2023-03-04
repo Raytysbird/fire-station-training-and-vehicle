@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fire_station_training_and_vehicle.Models;
 using System.Xml;
+using Microsoft.Data.SqlClient.Server;
+using Newtonsoft.Json;
+using Microsoft.Build.Framework;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
@@ -22,7 +25,7 @@ namespace fire_station_training_and_vehicle.Controllers
         // GET: Vehicle
         public async Task<IActionResult> Index()
         {
-            var fireFighterContext = _context.Vehicles.Include(v => v.Station).Include(v => v.VehicleType);
+            var fireFighterContext = _context.Vehicles.Include(v => v.Station).Include(v => v.VehicleType).Where(x=>x.IsDeleted==false);
             return View(await fireFighterContext.ToListAsync());
         }
 
@@ -76,6 +79,8 @@ namespace fire_station_training_and_vehicle.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VehicleId,VehicleTypeId,StationId,Name,LicencePlate,LicenceExpiry,VehicleStatus,Make,Model,Year,IsDeleted")] Vehicle vehicle)
         {
+            vehicle.VehicleStatus = "In Service";
+            vehicle.IsDeleted = false;
             if (ModelState.IsValid)
             {
                 _context.Add(vehicle);
@@ -87,29 +92,49 @@ namespace fire_station_training_and_vehicle.Controllers
             ViewData["DefaultTypeId"] = new SelectList(_context.VehicleCatalogues, "DefaultTypeId", "DefaultTypeId");
             return View(vehicle);
         }
+
+
+
         [HttpPost]
-        public IActionResult CreateType([FromForm] VehicleType type)
+        public IActionResult CreateType([FromBody] FormData formData)
         {
-            if (ModelState.IsValid)
+            VehicleType type = new VehicleType();
+            type.TypeId = formData.TypeId;
+            type.Description = formData.Description;
+            type.TankMinimumCapacity = formData.TankMinimumCapacity;
+            type.HeavyRescue = formData.HeavyRescue;
+            type.HoseOneHalfInch = formData.HoseOneHalfInch;
+            type.HoseOneInch = formData.HoseOneInch;
+            type.HoseTwoHalfInch = formData.HoseTwoHalfInch;
+            type.Ladders = formData.Ladders;
+            type.MasterStream = formData.MasterStream;
+            type.MaximumGvr = formData.MaximumGvr;
+            type.MinPersonel = formData.MinPersonel;
+            type.PumpAndRoll = formData.PumpAndRoll;
+            type.PumpMinimumFlow = formData.PumpMinimumFlow;
+            type.RatedPressure = formData.RatedPressure;
+            type.Turntable = formData.Turntable;
+            type.TypicalUse = formData.TypicalUse;
+            type.WildLandRescue = formData.WildLandRescue;
+            type.Structure = formData.Structure;
+
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.ToDictionary(
+                         kvp => kvp.Key,
+                         kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+               );
+                return Json(new { success = false, errors = errors });
+            }
+            else
             {
                 _context.VehicleTypes.Add(type);
                 _context.SaveChanges();
-                return Ok();
+                return Json(new { success = true });
             }
-            return Ok();
+
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> CreateType([Bind("VehicleTypeId,TypeId,Description,TankMinimumCapacity,HeavyRescue,HoseOneHalfInch,HoseOneInch,HoseTwoHalfInch,Ladders,MasterStream,MaximumGvr,MinPersonel,PumpAndRoll,PumpMinimumFlow,RatedPressure,Turntable,TypicalUse,WildLandRescue,Structure")] VehicleType vehicleType)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(vehicleType);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(vehicleType);
-        //}
 
         // GET: Vehicle/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -209,5 +234,28 @@ namespace fire_station_training_and_vehicle.Controllers
         {
             return _context.Vehicles.Any(e => e.VehicleId == id);
         }
+    }
+
+    public class FormData
+    {
+        public int? TypeId { get; set; }
+        [Required]
+        public string? Description { get; set; }
+        public int? TankMinimumCapacity { get; set; }
+        public bool? HeavyRescue { get; set; }
+        public int? HoseOneHalfInch { get; set; }
+        public int? HoseOneInch { get; set; }
+        public int? HoseTwoHalfInch { get; set; }
+        public bool? Ladders { get; set; }
+        public bool? MasterStream { get; set; }
+        public int? MaximumGvr { get; set; }
+        public int? MinPersonel { get; set; }
+        public bool? PumpAndRoll { get; set; }
+        public int? PumpMinimumFlow { get; set; }
+        public int? RatedPressure { get; set; }
+        public bool? Turntable { get; set; }
+        public string? TypicalUse { get; set; }
+        public bool? WildLandRescue { get; set; }
+        public bool? Structure { get; set; }
     }
 }

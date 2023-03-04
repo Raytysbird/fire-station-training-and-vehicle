@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Build.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace fire_station_training_and_vehicle.Models
@@ -12,6 +13,7 @@ namespace fire_station_training_and_vehicle.Models
 
         public int VehicleTypeId { get; set; }
         public int? TypeId { get; set; }
+        [Required]
         public string? Description { get; set; }
         public int? TankMinimumCapacity { get; set; }
         public bool? HeavyRescue { get; set; }
