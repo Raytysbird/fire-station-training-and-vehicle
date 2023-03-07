@@ -282,7 +282,8 @@
         }
         function submitForm() {
             var form = $("#frmVehicleType");
-            if (!form.valid()) {
+            var form2 = $("#frmVehicle");
+            if (!form.valid() || !form2.valid()) {
                 return false;
             }
             var description = $("textarea[name='description']").val();

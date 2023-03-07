@@ -10,9 +10,12 @@ using System.Xml;
 using Microsoft.Data.SqlClient.Server;
 using Newtonsoft.Json;
 using Microsoft.Build.Framework;
+using Microsoft.AspNetCore.Authorization;
+using static System.Collections.Specialized.BitVector32;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class VehicleController : Controller
     {
         private readonly FireFighterContext _context;
@@ -67,8 +70,8 @@ namespace fire_station_training_and_vehicle.Controllers
         // GET: Vehicle/Create
         public IActionResult Create()
         {
-            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Id");
-            ViewData["DefaultTypeId"] = new SelectList(_context.VehicleCatalogues, "DefaultTypeId", "DefaultTypeId");
+            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Name");
+            ViewData["DefaultTypeId"] = new SelectList(_context.VehicleCatalogues, "DefaultTypeId", "TypeName");
             return View();
         }
 
@@ -85,11 +88,12 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Vehicle created successfully!!";
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Id", vehicle.StationId);
+            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Name", vehicle.StationId);
             ViewData["VehicleTypeId"] = new SelectList(_context.VehicleTypes, "VehicleTypeId", "VehicleTypeId", vehicle.VehicleTypeId);
-            ViewData["DefaultTypeId"] = new SelectList(_context.VehicleCatalogues, "DefaultTypeId", "DefaultTypeId");
+            ViewData["DefaultTypeId"] = new SelectList(_context.VehicleCatalogues, "DefaultTypeId", "TypeName");
             return View(vehicle);
         }
 
@@ -149,7 +153,7 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 return NotFound();
             }
-            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Id", vehicle.StationId);
+            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Name", vehicle.StationId);
             ViewData["VehicleTypeId"] = new SelectList(_context.VehicleTypes, "VehicleTypeId", "VehicleTypeId", vehicle.VehicleTypeId);
             return View(vehicle);
         }
@@ -171,6 +175,7 @@ namespace fire_station_training_and_vehicle.Controllers
                 try
                 {
                     _context.Update(vehicle);
+                    TempData["Success"] = "Vehicle edited successfully!!";
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -186,35 +191,16 @@ namespace fire_station_training_and_vehicle.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Id", vehicle.StationId);
+            ViewData["StationId"] = new SelectList(_context.Stations, "Id", "Name", vehicle.StationId);
             ViewData["VehicleTypeId"] = new SelectList(_context.VehicleTypes, "VehicleTypeId", "VehicleTypeId", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 
-        // GET: Vehicle/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Vehicles == null)
-            {
-                return NotFound();
-            }
-
-            var vehicle = await _context.Vehicles
-                .Include(v => v.Station)
-                .Include(v => v.VehicleType)
-                .FirstOrDefaultAsync(m => m.VehicleId == id);
-            if (vehicle == null)
-            {
-                return NotFound();
-            }
-
-            return View(vehicle);
-        }
+        
 
         // POST: Vehicle/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+     
+        public async Task<IActionResult> Delete(int id)
         {
             if (_context.Vehicles == null)
             {
@@ -223,7 +209,9 @@ namespace fire_station_training_and_vehicle.Controllers
             var vehicle = await _context.Vehicles.FindAsync(id);
             if (vehicle != null)
             {
-                _context.Vehicles.Remove(vehicle);
+                vehicle.IsDeleted=true;
+                _context.Update(vehicle);
+                TempData["Success"] = "Vehicle deleted successfully!!";
             }
 
             await _context.SaveChangesAsync();

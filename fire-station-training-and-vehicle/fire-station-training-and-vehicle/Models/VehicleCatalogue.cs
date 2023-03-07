@@ -6,6 +6,7 @@ namespace fire_station_training_and_vehicle.Models
     public partial class VehicleCatalogue
     {
         public int DefaultTypeId { get; set; }
+        public string? TypeName { get; set; }
         public string? Description { get; set; }
         public int? TankMinimumCapacity { get; set; }
         public bool? HeavyRescue { get; set; }

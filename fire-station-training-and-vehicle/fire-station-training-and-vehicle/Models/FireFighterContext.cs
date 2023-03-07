@@ -263,7 +263,7 @@ namespace fire_station_training_and_vehicle.Models
             modelBuilder.Entity<VehicleCatalogue>(entity =>
             {
                 entity.HasKey(e => e.DefaultTypeId)
-                    .HasName("PK__VehicleC__08498062C07B587B");
+                    .HasName("PK__tmp_ms_x__08498062116F9B43");
 
                 entity.ToTable("VehicleCatalogue");
 
@@ -272,6 +272,10 @@ namespace fire_station_training_and_vehicle.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.MaximumGvr).HasColumnName("MaximumGVR");
+
+                entity.Property(e => e.TypeName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.TypicalUse)
                     .HasMaxLength(255)

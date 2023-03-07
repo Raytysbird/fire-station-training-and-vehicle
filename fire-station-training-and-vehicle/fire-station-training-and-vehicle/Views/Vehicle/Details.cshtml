@@ -1,14 +1,12 @@
 ﻿@model fire_station_training_and_vehicle.Models.Vehicle
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Vehicle Details";
 }
+<h1>Details for @Html.DisplayFor(model => model.Name)</h1>
 
-<h1>Details</h1>
 
-<div>
-    <h4>Vehicle</h4>
-    <hr />
+<div class="row ms-5 g-0">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
@@ -52,27 +50,23 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Year)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
+      
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Station)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Station.Id)
+            @Html.DisplayFor(model => model.Station.Name)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.VehicleType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VehicleType.VehicleTypeId)
+           Type - @Html.DisplayFor(model => model.VehicleType.TypeId)
         </dd>
     </dl>
-</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.VehicleId">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
 </div>
