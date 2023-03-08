@@ -1,0 +1,2 @@
+﻿CREATE TABLE RequestType (Id int IDENTITY NOT NULL, Name VARCHAR(250) NULL, PRIMARY KEY (Id) 
+);
