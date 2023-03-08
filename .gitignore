@@ -6,3 +6,7 @@
 /fire-station-training-and-vehicle/.vs/fire-station-training-and-vehicle/DesignTimeBuild/.dtbcache.v2
 /fire-station-training-and-vehicle/fire-station-training-and-vehicle/bin/Debug/net6.0/fire-station-training-and-vehicle.dll
 /fire-station-training-and-vehicle/FireStationDb/bin/Debug
+*.dbmdl
+/fire-station-training-and-vehicle/FireStationDb/obj/Debug
+*.jfm
+*.refactorlog
