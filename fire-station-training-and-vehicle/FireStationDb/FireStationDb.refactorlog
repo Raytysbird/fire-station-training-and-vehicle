@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="879710a3-d13d-4c3e-a23b-232e4afa66b2" ChangeDateTime="02/04/2023 23:30:17">
+    <Property Name="ElementName" Value="[dbo].[Station].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Station]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StationId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ab6e8f53-80b2-451f-9f1a-cc39259a467b" ChangeDateTime="02/04/2023 23:41:32">
+    <Property Name="ElementName" Value="[dbo].[Station].[StationId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Station]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5dc170aa-fa29-43d9-9e1b-79c4837874e1" ChangeDateTime="02/19/2023 20:12:24">
+    <Property Name="ElementName" Value="[dbo].[Document].[TypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Document]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RequestTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="07bad605-9527-4d25-81e8-03093e455957" ChangeDateTime="02/26/2023 23:31:28">
+    <Property Name="ElementName" Value="[dbo].[VehicleCatalogue].[Min]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VehicleCatalogue]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MinPersonel" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8a4078fb-11f8-4f51-8450-bba8b62c7c6f" ChangeDateTime="02/26/2023 23:31:38">
+    <Property Name="ElementName" Value="[dbo].[VehicleCatalogue].[pump_and_roll]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VehicleCatalogue]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PumpAndRoll" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6b8e9561-0f73-4cc8-b63b-ac80c6dadd94" ChangeDateTime="02/26/2023 23:31:48">
+    <Property Name="ElementName" Value="[dbo].[VehicleCatalogue].[pump_minimum_flow]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VehicleCatalogue]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PumpMinimumFlow" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c03536dd-ac87-48c5-a85f-d2f32fd499ef" ChangeDateTime="02/26/2023 23:31:55">
+    <Property Name="ElementName" Value="[dbo].[VehicleCatalogue].[rated_pressure]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VehicleCatalogue]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RatedPressure" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="afa4ffa5-b062-44fd-a7fb-0cad884a75b4" ChangeDateTime="02/26/2023 23:31:59">
+    <Property Name="ElementName" Value="[dbo].[VehicleCatalogue].[turntable]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VehicleCatalogue]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Turntable" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="de6e2dd7-9208-4799-9f9d-15f5eaf9e135" ChangeDateTime="02/26/2023 23:32:05">
+    <Property Name="ElementName" Value="[dbo].[VehicleCatalogue].[typical_use]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VehicleCatalogue]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TypicalUse" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5cc19b8d-f55f-4023-82ec-55a0b001d9fe" ChangeDateTime="02/26/2023 23:32:12">
+    <Property Name="ElementName" Value="[dbo].[VehicleCatalogue].[wild_land_rescue]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VehicleCatalogue]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WildLandRescue" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fd115ce8-35ea-4b38-b171-53ec6f3efb8a" ChangeDateTime="02/26/2023 23:32:16">
+    <Property Name="ElementName" Value="[dbo].[VehicleCatalogue].[structure]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VehicleCatalogue]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Structure" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7ed2acc2-f98e-4a8d-b55f-b38bfc0873c5" ChangeDateTime="02/26/2023 23:35:58">
+    <Property Name="ElementName" Value="[dbo].[VehicleCatalogue].[MaxGVR]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VehicleCatalogue]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MaximumGVR" />
+  </Operation>
+</Operations>
