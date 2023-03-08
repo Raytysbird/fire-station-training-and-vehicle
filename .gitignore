@@ -2,7 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/fire-station-training-and-vehicle/FireStationDb
 /fire-station-training-and-vehicle/.vs/fire-station-training-and-vehicle/FileContentIndex/38a35951-179e-4bc7-94ac-27f111ab764d.vsidx
 /fire-station-training-and-vehicle/.vs/fire-station-training-and-vehicle/DesignTimeBuild/.dtbcache.v2
 /fire-station-training-and-vehicle/fire-station-training-and-vehicle/bin/Debug/net6.0/fire-station-training-and-vehicle.dll
+/fire-station-training-and-vehicle/FireStationDb/bin/Debug
