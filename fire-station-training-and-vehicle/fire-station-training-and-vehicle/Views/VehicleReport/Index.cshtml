@@ -1,0 +1,59 @@
+﻿@model IEnumerable<fire_station_training_and_vehicle.Models.VehicleReport>
+
+@{
+    ViewData["Title"] = "Reported Issues";
+}
+
+<h1>Your Reported Issues</h1>
+
+
+<div class="row ms-5 g-0">
+    <div class="col-lg-10">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Vehicle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateReported)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IssueType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Vehicle.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateReported)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IssueType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>
+            <a asp-action="Create">Report New Issue</a>
+        </p>
+    </div>
+</div>

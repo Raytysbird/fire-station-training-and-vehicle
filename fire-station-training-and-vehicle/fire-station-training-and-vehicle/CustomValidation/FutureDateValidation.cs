@@ -10,7 +10,7 @@ namespace fire_station_training_and_vehicle.CustomValidation
     {
         public FutureDateValidation()
         {
-            ErrorMessage = "Date of birth cannot be in future!!";
+            ErrorMessage = "Date cannot be in future!!";
         }
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

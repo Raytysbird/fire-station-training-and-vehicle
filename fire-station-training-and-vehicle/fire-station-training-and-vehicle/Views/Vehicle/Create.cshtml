@@ -327,7 +327,7 @@
                 structure: structure,
                 ladders: ladders
             };
-            alert(data);
+            
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(data),
@@ -335,7 +335,7 @@
                 contentType: "application/json",
                 success: function (response) {
                     if (response.success) {
-                        alert('Record created successfully.');
+                        
                        
                     } else {
                         

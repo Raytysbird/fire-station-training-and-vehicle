@@ -168,6 +168,30 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/VehicleReport/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVJlcG9ydFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/VehicleReport/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVJlcG9ydFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/VehicleReport/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVJlcG9ydFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/VehicleReport/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVJlcG9ydFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/VehicleReport/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVJlcG9ydFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/VehicleReport/Issues.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVJlcG9ydFxJc3N1ZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/VehicleTypes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVR5cGVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

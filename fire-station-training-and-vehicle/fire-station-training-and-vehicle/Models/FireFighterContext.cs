@@ -24,10 +24,12 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<Document> Documents { get; set; } = null!;
         public virtual DbSet<Gender> Genders { get; set; } = null!;
+        public virtual DbSet<IssueType> IssueTypes { get; set; } = null!;
         public virtual DbSet<RequestType> RequestTypes { get; set; } = null!;
         public virtual DbSet<Station> Stations { get; set; } = null!;
         public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
         public virtual DbSet<VehicleCatalogue> VehicleCatalogues { get; set; } = null!;
+        public virtual DbSet<VehicleReport> VehicleReports { get; set; } = null!;
         public virtual DbSet<VehicleType> VehicleTypes { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -188,6 +190,13 @@ namespace fire_station_training_and_vehicle.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<IssueType>(entity =>
+            {
+                entity.Property(e => e.Issue)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<RequestType>(entity =>
             {
                 entity.ToTable("RequestType");
@@ -280,6 +289,38 @@ namespace fire_station_training_and_vehicle.Models
                 entity.Property(e => e.TypicalUse)
                     .HasMaxLength(255)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VehicleReport>(entity =>
+            {
+                entity.HasKey(e => e.ReportId)
+                    .HasName("ReportId");
+
+                entity.Property(e => e.DateReported).HasColumnType("date");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IssueType)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId).HasMaxLength(450);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.VehicleReports)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_ReportUser");
+
+                entity.HasOne(d => d.Vehicle)
+                    .WithMany(p => p.VehicleReports)
+                    .HasForeignKey(d => d.VehicleId)
+                    .HasConstraintName("FK_VehicleReport");
             });
 
             modelBuilder.Entity<VehicleType>(entity =>

@@ -5,6 +5,11 @@ namespace fire_station_training_and_vehicle.Models
 {
     public partial class Vehicle
     {
+        public Vehicle()
+        {
+            VehicleReports = new HashSet<VehicleReport>();
+        }
+
         public int VehicleId { get; set; }
         public int? VehicleTypeId { get; set; }
         public int? StationId { get; set; }
@@ -19,5 +24,6 @@ namespace fire_station_training_and_vehicle.Models
 
         public virtual Station? Station { get; set; }
         public virtual VehicleType? VehicleType { get; set; }
+        public virtual ICollection<VehicleReport> VehicleReports { get; set; }
     }
 }

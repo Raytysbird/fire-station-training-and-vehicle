@@ -79,6 +79,8 @@
     <Build Include="dbo\Tables\VehicleCatalogue.sql" />
     <Build Include="dbo\Tables\VehicleType.sql" />
     <Build Include="dbo\Tables\Vehicle.sql" />
+    <Build Include="dbo\Tables\VehicleReports.sql" />
+    <Build Include="dbo\Tables\IssueTypes.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FireStationDb.refactorlog" />

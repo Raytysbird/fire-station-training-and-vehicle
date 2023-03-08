@@ -1,0 +1,41 @@
+﻿@model IEnumerable<fire_station_training_and_vehicle.Models.VehicleReport>
+@{
+    ViewData["Title"] = "View";  
+}
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .row {
+        background: white;
+        border-radius: 30px;
+    }
+</style>
+<h1>Vehicle Issues Reported</h1>
+<div class="row mx-4 my-4 no-gutters">
+    @if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="card mx-4" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Vehicle.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@item.IssueType</h6>
+                    <p class="card-text"> Reported By:@item.User.FirstName @item.User.LastName <br />@item.Description</p>
+                    <a href="#" class="btn btn-success">Send for maintenance</a>
+                </div>
+            </div>
+           
+        }
+    }
+    else
+    {
+        <h5>No new reported issues</h5>
+    }
+
+</div>
+
