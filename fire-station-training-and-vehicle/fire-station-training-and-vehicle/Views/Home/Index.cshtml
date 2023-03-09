@@ -122,12 +122,12 @@
         }
     </div>
 </div>
+@if (User.IsInRole("Admin"))
+{
+    <div class="container px-4 py-5" id="hanging-icons">
+        <h2 class="pb-2 border-bottom">Firefighters</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
 
-<div class="container px-4 py-5" id="hanging-icons">
-    <h2 class="pb-2 border-bottom">Firefighters</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        @if (User.IsInRole("Admin"))
-        {
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
@@ -140,33 +140,34 @@
                     </a>
                 </div>
             </div>
-        }
-        <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
+
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
+                </div>
+                <div>
+                    <h2>Featured title</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Index" asp-controller="User" class="btn btn-outline-success">
+                        All Users
+                    </a>
+                </div>
             </div>
-            <div>
-                <h2>Featured title</h2>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a asp-action="Index" asp-controller="User" class="btn btn-outline-success">
-                    All Users
-                </a>
-            </div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
-            </div>
-            <div>
-                <h2>Featured title</h2>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a href="#" class="btn btn-outline-dark">
-                    Update Status
-                </a>
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
+                </div>
+                <div>
+                    <h2>Featured title</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a href="#" class="btn btn-outline-dark">
+                        Update Status
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
 @if (User.IsInRole("Admin"))
 {
     <div class="container px-4 py-5" id="hanging-icons">
@@ -212,12 +213,12 @@
         </div>
     </div>
 }
-@if (User.IsInRole("Admin"))
-{
-    <div class="container px-4 py-5" id="hanging-icons">
-        <h2 class="pb-2 border-bottom">Vehicles</h2>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
 
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Vehicles</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        @if (User.IsInRole("Admin"))
+        {
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
@@ -231,6 +232,7 @@
                 </div>
             </div>
 
+
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
@@ -243,6 +245,7 @@
                     </a>
                 </div>
             </div>
+
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
@@ -250,14 +253,30 @@
                 <div>
                     <h2>Featured title</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a href="#" class="btn btn-outline-dark">
-                        Maintenance Record*
+                    <a asp-action="Issues" asp-controller="VehicleReport" class="btn btn-outline-dark">
+                        Vehicle Issues Report
                     </a>
                 </div>
             </div>
-        </div>
+        }
+        @if (User.IsInRole("Employee"))
+        {
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
+                </div>
+                <div>
+                    <h2>Featured title</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Create" asp-controller="VehicleReport" class="btn btn-outline-dark">
+                        Report vehicle issue
+                    </a>
+                </div>
+            </div>
+        }
     </div>
-}
+</div>
+
 <div class="container px-4 py-5" id="hanging-icons">
     <h2 class="pb-2 border-bottom">Training</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">

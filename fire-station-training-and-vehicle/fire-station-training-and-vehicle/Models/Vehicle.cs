@@ -7,6 +7,7 @@ namespace fire_station_training_and_vehicle.Models
     {
         public Vehicle()
         {
+            Maintenances = new HashSet<Maintenance>();
             VehicleReports = new HashSet<VehicleReport>();
         }
 
@@ -24,6 +25,7 @@ namespace fire_station_training_and_vehicle.Models
 
         public virtual Station? Station { get; set; }
         public virtual VehicleType? VehicleType { get; set; }
+        public virtual ICollection<Maintenance> Maintenances { get; set; }
         public virtual ICollection<VehicleReport> VehicleReports { get; set; }
     }
 }

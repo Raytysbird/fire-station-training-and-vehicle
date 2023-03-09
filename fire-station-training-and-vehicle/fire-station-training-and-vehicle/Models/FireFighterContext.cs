@@ -25,6 +25,7 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<Document> Documents { get; set; } = null!;
         public virtual DbSet<Gender> Genders { get; set; } = null!;
         public virtual DbSet<IssueType> IssueTypes { get; set; } = null!;
+        public virtual DbSet<Maintenance> Maintenances { get; set; } = null!;
         public virtual DbSet<RequestType> RequestTypes { get; set; } = null!;
         public virtual DbSet<Station> Stations { get; set; } = null!;
         public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
@@ -195,6 +196,36 @@ namespace fire_station_training_and_vehicle.Models
                 entity.Property(e => e.Issue)
                     .HasMaxLength(250)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Maintenance>(entity =>
+            {
+                entity.HasKey(e => e.RepairId)
+                    .HasName("PK__Maintena__07D0BC2D1A0082AB");
+
+                entity.ToTable("Maintenance");
+
+                entity.Property(e => e.DateCompleted).HasColumnType("date");
+
+                entity.Property(e => e.DateOfRepair).HasColumnType("date");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Notes)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Vehicle)
+                    .WithMany(p => p.Maintenances)
+                    .HasForeignKey(d => d.VehicleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_VehicleMain");
             });
 
             modelBuilder.Entity<RequestType>(entity =>

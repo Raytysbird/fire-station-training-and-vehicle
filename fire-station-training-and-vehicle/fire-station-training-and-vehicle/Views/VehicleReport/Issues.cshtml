@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<fire_station_training_and_vehicle.Models.VehicleReport>
 @{
-    ViewData["Title"] = "View";  
+    ViewData["Title"] = "View";
 }
 
 <style>
@@ -16,6 +16,7 @@
     }
 </style>
 <h1>Vehicle Issues Reported</h1>
+<div id="done" hidden></div>
 <div class="row mx-4 my-4 no-gutters">
     @if (Model.Count() > 0)
     {
@@ -26,10 +27,88 @@
                     <h5 class="card-title">@item.Vehicle.Name</h5>
                     <h6 class="card-subtitle mb-2 text-muted">@item.IssueType</h6>
                     <p class="card-text"> Reported By:@item.User.FirstName @item.User.LastName <br />@item.Description</p>
-                    <a href="#" class="btn btn-success">Send for maintenance</a>
+                    <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadModal">Send for maintenance</a>
                 </div>
             </div>
-           
+
+
+            <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="uploadModalLabel">Confirm Maintenance</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="frmMaintenance">
+                            <div class="modal-body">
+                                <div class="row ">
+                                    <input type="text" id="vehicleId" name="vehicleId" data-val="true" value="@item.VehicleId" class="form-control" hidden />
+                                    <input type="text" id="description" name="description" value="@item.IssueType" data-val="true" class="form-control" hidden />
+                                    <input type="text" id="reportId" name="reportId" value="@item.ReportId" data-val="true" class="form-control" hidden />
+                                    <div class="col-md-12">
+                                        <label class="control-label" for="mileage">Mileage</label>
+                                        <input type="number" id="mileage" name="mileage" data-val="true" data-val-required="Mileage is required." class="form-control" />
+                                        <span data-valmsg-for="mileage" data-valmsg-replace="true" class="text-danger" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="control-label" for="notes">Notes</label>
+                                        <input type="text" id="notes" name="notes" data-val="true" data-val-required="Description is required." class="form-control" />
+                                        <span data-valmsg-for="notes" data-valmsg-replace="true" class="text-danger" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                <button type="submit" onclick="submitForm();" class="btn btn-success">Confirm</button>
+                            </div>
+                        </form>
+                        <script>
+
+                            function submitForm() {
+                                var element = document.getElementById("done");
+                                element.classList.add("reload");
+                                var form = $("#frmMaintenance");
+                                if (!form.valid()) {
+                                    return false;
+
+                                }
+                                var mileage = $("input[name='mileage']").val();
+                                var notes = $("input[name='notes']").val();
+                                var vehicleId = $("input[name='vehicleId']").val();
+                                var description = $("input[name='description']").val();
+                                var reportId = $("input[name='reportId']").val();
+
+                                var data = {
+                                    notes: notes,
+                                    description: description,
+                                    milage: mileage,
+                                    vehicleId: vehicleId,
+                                    reportId: reportId
+                                };
+
+                                $.ajax({
+                                    type: 'POST',
+                                    data: JSON.stringify(data),
+                                    url: '/Maintenance/CreateRecord/',
+                                    contentType: "application/json",
+                                    success: function (response) {
+
+
+                                    },
+                                    error: function (xhr, status, error) {
+
+                                    }
+                                });
+                            }
+                        </script>
+                    </div>
+                </div>
+
+            </div>
+
         }
     }
     else
@@ -38,4 +117,12 @@
     }
 
 </div>
+<script>
+    var element = document.getElementById("done");
+    if (document.getElementById('done').classList.contains('reload')) {
+        alert("reloading now");
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
