@@ -1,0 +1,52 @@
+﻿@model IEnumerable<fire_station_training_and_vehicle.Models.Maintenance>
+
+@{
+    ViewData["Title"] = "Vehicles";
+}
+
+<h1>Vehicles Not in Service</h1>
+
+
+<div class="row ms-5 g-0">
+    <div class="col-lg-10">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Vehicle.Name)
+                    </th>
+                   
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th scope="col">
+                        Last Operation Date
+                    </th>
+                   
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Vehicle.Name)
+                        </td>
+                      
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfRepair)
+                        </td>
+                        <td>
+                            <a class="link-primary" asp-controller="Maintenance" asp-action="MarkResolve"  asp-route-id="@item.RepairId">Mark Resolved</a>
+                           
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<fire_station_training_and_vehicle.Models.Maintenance>
+
+@{
+    ViewData["Title"] = "Maintenance Records";
+
+}
+<style>
+    h1,h4 {
+        margin-bottom: 0.5em;
+        text-align: center;
+    }
+
+    .buttonContainer {
+        text-align: center;
+    }
+
+    .adminToggle {
+        margin-top: 1em;
+    }
+</style>
+
+
+<div>
+    <div>
+        <h1>Welcome to the Vehicle Maintenance board</h1>
+        <h4>From here you can view vehicle status, add records, view vehicle issues history and mark others complete</h4>
+    </div>
+    <div class="buttonContainer">
+
+        <span class="badge rounded-pill bg-primary mb-2">Total Vehicles: @ViewBag.TotalVehicles</span>
+        <span class="badge rounded-pill bg-success">In Service: @ViewBag.InService</span>
+        <span class="badge rounded-pill bg-danger">Not In Service: @ViewBag.OutVehicles</span> <br />
+
+        <a class="btnGame btn btn-success" asp-controller="VehicleReport" asp-action="Issues" id="manage_games">Issues Reported</a>
+        <a class="btnEvent btn btn-primary"  asp-controller="Maintenance" asp-action="Create" id="manage_events"> Send vehicle for Maintenance</a>
+        <a class="btnEvent btn btn-success" asp-controller="Maintenance" asp-action="Index" id="manage_merch"> Vehicle History</a>
+        <a asp-controller="Maintenance" asp-action="NotInService" class="btnReview btn btn-info" id="approve_reviews">Move vehicle back to operation</a>
+    </div>
+</div>

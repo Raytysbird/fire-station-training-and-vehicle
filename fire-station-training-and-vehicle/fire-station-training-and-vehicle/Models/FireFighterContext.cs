@@ -224,7 +224,6 @@ namespace fire_station_training_and_vehicle.Models
                 entity.HasOne(d => d.Vehicle)
                     .WithMany(p => p.Maintenances)
                     .HasForeignKey(d => d.VehicleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VehicleMain");
             });
 

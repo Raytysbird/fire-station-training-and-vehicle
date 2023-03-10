@@ -6,6 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fire_station_training_and_vehicle.Models;
+using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using System.Composition;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
@@ -19,10 +24,57 @@ namespace fire_station_training_and_vehicle.Controllers
         }
 
         // GET: Maintenance
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {  
+            ViewData["VehicleId"] = new SelectList(_context.Vehicles, "VehicleId", "Name");
+            return View();
+        }
+        public async Task<IActionResult> NotInService()
         {
-            var fireFighterContext = _context.Maintenances.Include(m => m.Vehicle);
-            return View(await fireFighterContext.ToListAsync());
+           var vehicle= await _context.Maintenances.Include(x=>x.Vehicle).Where(x=>x.Status=="Out").ToListAsync();
+            return View(vehicle);
+        }
+
+        public async Task<IActionResult> MarkResolve(int id)
+        {
+            var repair = _context.Maintenances.Find(id);
+
+            repair.DateCompleted = DateTime.Now;
+            repair.Status = "In";
+            _context.Update(repair);
+            await _context.SaveChangesAsync();
+
+            var vehicle = _context.Vehicles.Find(repair.VehicleId);
+            vehicle.VehicleStatus = "In Service";
+            _context.Update(repair);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("NotInService", "Maintenance");
+
+
+        }
+        public IActionResult MaintenanceHome()
+        {
+            int totalVehicles = _context.Vehicles.Count();
+            var vehicles = _context.Vehicles.Where(x => x.VehicleStatus == "In Service");
+            int inService = vehicles.Count();
+            int outVehicles = totalVehicles - inService;
+
+            ViewBag.TotalVehicles = totalVehicles;
+            ViewBag.InService = inService;
+            ViewBag.OutVehicles = outVehicles;
+
+            ViewData["VehicleId"] = new SelectList(_context.Vehicles, "VehicleId", "Name");
+            return View();
+        }
+        [HttpGet]
+        public IActionResult MaintenanceRecord(int id)
+        {
+          
+            var record=  _context.Maintenances.Include(x=>x.Vehicle).Where(x=>x.VehicleId == id).ToList();
+           
+            return Ok(record);
         }
 
         // GET: Maintenance/Details/5
@@ -47,7 +99,8 @@ namespace fire_station_training_and_vehicle.Controllers
         // GET: Maintenance/Create
         public IActionResult Create()
         {
-            ViewData["VehicleId"] = new SelectList(_context.Vehicles, "VehicleId", "VehicleId");
+            ViewData["VehicleId"] = new SelectList(_context.Vehicles, "VehicleId", "Name");
+            ViewData["IssueType"] = new SelectList(_context.IssueTypes, "Issue", "Issue");
             return View();
         }
 
@@ -58,13 +111,23 @@ namespace fire_station_training_and_vehicle.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RepairId,VehicleId,DateOfRepair,Description,DateCompleted,Milage,Notes,Status")] Maintenance maintenance)
         {
+            maintenance.DateOfRepair= DateTime.Now;
+            maintenance.Status = "Out";
+            var vehicle = _context.Vehicles.Find(maintenance.VehicleId);
+            if (vehicle != null)
+            {
+                vehicle.VehicleStatus = "Out for maintenance";
+                _context.Update(vehicle);
+
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(maintenance);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VehicleId"] = new SelectList(_context.Vehicles, "VehicleId", "VehicleId", maintenance.VehicleId);
+            ViewData["VehicleId"] = new SelectList(_context.Vehicles, "VehicleId", "Name", maintenance.VehicleId);
+            ViewData["IssueType"] = new SelectList(_context.IssueTypes, "Issue", "Issue");
             return View(maintenance);
         }
         [HttpPost]
@@ -84,6 +147,13 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 report.Status = "Action taken";
                 _context.Update(report);
+
+            }
+            var vehicle = _context.Vehicles.Find(maintenance.VehicleId);
+            if (vehicle != null)
+            {
+                vehicle.VehicleStatus = "Out for maintenance";
+                _context.Update(vehicle);
 
             }
             if (!ModelState.IsValid)

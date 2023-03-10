@@ -1,5 +1,5 @@
 ﻿CREATE TABLE Maintenance (RepairId int IDENTITY NOT NULL,
-VehicleId int NOT NULL,
+VehicleId int NULL,
 DateOfRepair DATE NULL,
 Description varchar(255) NULL,
 DateCompleted DATE NULL, 

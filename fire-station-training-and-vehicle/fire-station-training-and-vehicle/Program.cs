@@ -4,6 +4,9 @@ using fire_station_training_and_vehicle.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +37,11 @@ builder.Services.AddDefaultIdentity<User>(options =>
 
       
 builder.Services.AddTransient<EmailSender>();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+
 
 
 //builder.Services.AddControllersWithViews().AddRazorPagesOptions(options =>
