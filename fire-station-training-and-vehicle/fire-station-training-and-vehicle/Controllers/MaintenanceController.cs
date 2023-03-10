@@ -124,7 +124,7 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 _context.Add(maintenance);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("MaintenanceHome");
             }
             ViewData["VehicleId"] = new SelectList(_context.Vehicles, "VehicleId", "Name", maintenance.VehicleId);
             ViewData["IssueType"] = new SelectList(_context.IssueTypes, "Issue", "Issue");
