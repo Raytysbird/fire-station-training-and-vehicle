@@ -22,12 +22,14 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
+        public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<Document> Documents { get; set; } = null!;
         public virtual DbSet<Gender> Genders { get; set; } = null!;
         public virtual DbSet<IssueType> IssueTypes { get; set; } = null!;
         public virtual DbSet<Maintenance> Maintenances { get; set; } = null!;
         public virtual DbSet<RequestType> RequestTypes { get; set; } = null!;
         public virtual DbSet<Station> Stations { get; set; } = null!;
+        public virtual DbSet<UserTask> UserTasks { get; set; } = null!;
         public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
         public virtual DbSet<VehicleCatalogue> VehicleCatalogues { get; set; } = null!;
         public virtual DbSet<VehicleReport> VehicleReports { get; set; } = null!;
@@ -155,6 +157,21 @@ namespace fire_station_training_and_vehicle.Models
                     .HasForeignKey(d => d.UserId);
             });
 
+            modelBuilder.Entity<Course>(entity =>
+            {
+                entity.Property(e => e.Details)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RenewalPeriod)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Document>(entity =>
             {
                 entity.ToTable("Document");
@@ -257,6 +274,34 @@ namespace fire_station_training_and_vehicle.Models
                 entity.Property(e => e.PhoneNumber)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UserTask>(entity =>
+            {
+                entity.HasKey(e => e.TaskId)
+                    .HasName("TaskId");
+
+                entity.ToTable("UserTask");
+
+                entity.Property(e => e.LastDate).HasColumnType("date");
+
+                entity.HasOne(d => d.Course)
+                    .WithMany(p => p.UserTasks)
+                    .HasForeignKey(d => d.CourseId)
+                    .HasConstraintName("FKTask776266");
+
+                entity.HasMany(d => d.Users)
+                    .WithMany(p => p.Tasks)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TaskFireFighter",
+                        l => l.HasOne<AspNetUser>().WithMany().HasForeignKey("UserId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FKUser"),
+                        r => r.HasOne<UserTask>().WithMany().HasForeignKey("TaskId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FKTask"),
+                        j =>
+                        {
+                            j.HasKey("TaskId", "UserId").HasName("PK__Task_Fir__AD11C5755C90AB3F");
+
+                            j.ToTable("Task_FireFighter");
+                        });
             });
 
             modelBuilder.Entity<Vehicle>(entity =>

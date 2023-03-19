@@ -1,0 +1,62 @@
+﻿@model fire_station_training_and_vehicle.Models.Course
+
+@{
+    ViewData["Title"] = "Edit Course";
+   
+}
+
+<h1>Edit Course @Model.Name</h1>
+
+
+<div class="row ms-5 g-0">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CourseId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Details" class="control-label"></label>
+                <input asp-for="Details" class="form-control" />
+                <span asp-validation-for="Details" class="text-danger"></span>
+            </div>
+            <div class="form-check form-group">
+
+                @Html.RadioButtonFor(m => m.RenewalPeriod,"Month")
+
+                Month
+
+                @Html.RadioButtonFor(m => m.RenewalPeriod,"Quaterly")
+
+                Quaterly
+
+                @Html.RadioButtonFor(m => m.RenewalPeriod,"Half Year")
+
+                Half Year
+
+                @Html.RadioButtonFor(m => m.RenewalPeriod,"Yearly")
+
+                Yearly
+
+                @Html.RadioButtonFor(m => m.RenewalPeriod,"Never")
+
+                Never
+
+                <span asp-validation-for="RenewalPeriod" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn2" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+</div>
+
+

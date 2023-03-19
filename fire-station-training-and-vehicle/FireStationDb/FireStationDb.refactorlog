@@ -84,4 +84,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="MaximumGVR" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c5d7d097-7fb9-4990-b0db-c64f696df3f5" ChangeDateTime="03/18/2023 20:15:37">
+    <Property Name="ElementName" Value="[dbo].[Task].[Task_Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Task]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TaskId" />
+  </Operation>
 </Operations>

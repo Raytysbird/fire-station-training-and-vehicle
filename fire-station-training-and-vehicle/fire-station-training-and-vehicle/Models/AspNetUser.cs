@@ -13,6 +13,7 @@ namespace fire_station_training_and_vehicle.Models
             Documents = new HashSet<Document>();
             VehicleReports = new HashSet<VehicleReport>();
             Roles = new HashSet<AspNetRole>();
+            Tasks = new HashSet<UserTask>();
         }
 
         public string Id { get; set; } = null!;
@@ -47,5 +48,6 @@ namespace fire_station_training_and_vehicle.Models
         public virtual ICollection<VehicleReport> VehicleReports { get; set; }
 
         public virtual ICollection<AspNetRole> Roles { get; set; }
+        public virtual ICollection<UserTask> Tasks { get; set; }
     }
 }
