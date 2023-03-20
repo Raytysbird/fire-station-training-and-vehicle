@@ -283,7 +283,7 @@ namespace fire_station_training_and_vehicle.Models
 
                 entity.ToTable("UserTask");
 
-                entity.Property(e => e.LastDate).HasColumnType("date");
+                entity.Property(e => e.LastDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.UserTasks)
@@ -300,7 +300,7 @@ namespace fire_station_training_and_vehicle.Models
                         {
                             j.HasKey("TaskId", "UserId").HasName("PK__Task_Fir__AD11C5755C90AB3F");
 
-                            j.ToTable("Task_FireFighter");
+                            j.ToTable("TaskFireFighter");
                         });
             });
 

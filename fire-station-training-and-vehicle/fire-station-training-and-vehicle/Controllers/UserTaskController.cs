@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fire_station_training_and_vehicle.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
     public class UserTaskController : Controller
     {
         private readonly FireFighterContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public UserTaskController(FireFighterContext context)
+        public UserTaskController(FireFighterContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: UserTask
@@ -32,7 +35,7 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.Users = _context.AspNetUsers.ToList();
             var userTask = await _context.UserTasks
                 .Include(u => u.Course)
                 .FirstOrDefaultAsync(m => m.TaskId == id);
@@ -49,6 +52,8 @@ namespace fire_station_training_and_vehicle.Controllers
         {
             ViewBag.Users=_context.AspNetUsers.ToList();
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name");
+            var tasks=_context.UserTasks.Include(x=>x.Course).Where(x=>x.LastDate>DateTime.Now).ToList();
+            ViewBag.Tasks = tasks;
             return View();
         }
 
@@ -68,6 +73,17 @@ namespace fire_station_training_and_vehicle.Controllers
             ViewBag.Users = _context.AspNetUsers.ToList();
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", userTask.CourseId);
             return View(userTask);
+        }
+        [HttpPost]
+        public IActionResult AssignUser(List<string> selectedValues, int id)
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            foreach (var item in selectedValues)
+            {
+               
+            }
+            // process selected values
+            return Ok();
         }
 
         // GET: UserTask/Edit/5

@@ -83,7 +83,7 @@
     <Build Include="dbo\Tables\IssueTypes.sql" />
     <Build Include="dbo\Tables\Maintenance.sql" />
     <Build Include="dbo\Tables\Course.sql" />
-    <Build Include="dbo\Tables\Task.sql" />
+    <Build Include="dbo\Tables\TaskUser.sql" />
     <Build Include="dbo\Tables\UserTask.sql" />
   </ItemGroup>
   <ItemGroup>
