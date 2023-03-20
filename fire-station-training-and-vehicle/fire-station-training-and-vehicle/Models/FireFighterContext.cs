@@ -30,6 +30,7 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<RequestType> RequestTypes { get; set; } = null!;
         public virtual DbSet<Station> Stations { get; set; } = null!;
         public virtual DbSet<UserTask> UserTasks { get; set; } = null!;
+        public virtual DbSet<AssignedTask> AssignedTasks { get; set; } = null!;
         public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
         public virtual DbSet<VehicleCatalogue> VehicleCatalogues { get; set; } = null!;
         public virtual DbSet<VehicleReport> VehicleReports { get; set; } = null!;
@@ -56,7 +57,17 @@ namespace fire_station_training_and_vehicle.Models
 
                 entity.Property(e => e.NormalizedName).HasMaxLength(256);
             });
+            modelBuilder.Entity<AssignedTask>(entity =>
+            {
+                entity.HasKey(e => new { e.TaskId, e.UserId })
+                    .HasName("PK__Assigned__AD11C575A387F7CD");
 
+                entity.ToTable("AssignedTask");
+
+                entity.Property(e => e.TaskId).HasColumnName("Task_Id");
+
+                entity.Property(e => e.UserId).HasColumnName("User_Id");
+            });
             modelBuilder.Entity<AspNetRoleClaim>(entity =>
             {
                 entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");

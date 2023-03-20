@@ -1,5 +1,5 @@
-﻿CREATE TABLE Task_FireFighter (TaskId int NOT NULL,
-UserId NVARCHAR(450) NOT NULL,
-PRIMARY KEY (TaskId, UserId),
- CONSTRAINT [FKUser] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]),
-    CONSTRAINT [FKTask] FOREIGN KEY ([TaskId]) REFERENCES [dbo].[Task] ([TaskId]));
+﻿CREATE TABLE UserTask ([TaskId] int IDENTITY NOT NULL,
+CourseId int NULL,
+LastDate date NULL, 
+IsCompleted bit NULL,
+CONSTRAINT TaskId PRIMARY KEY ([TaskId]));
