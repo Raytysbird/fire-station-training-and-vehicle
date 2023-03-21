@@ -24,8 +24,11 @@ namespace fire_station_training_and_vehicle.Controllers
         // GET: UserTask
         public async Task<IActionResult> Index()
         {
-            var fireFighterContext = _context.UserTasks.Include(u => u.Course);
-            return View(await fireFighterContext.ToListAsync());
+            var userId = _userManager.GetUserId(HttpContext.User);
+            //var tasks = _context.UserTasks.Include(u => u.Course).Include(x => x.AssignedTasks);
+           
+            var tasks = _context.AssignedTasks.Include(x => x.Task).Include(x => x.Task.Course).Where(x => x.UserId == userId);
+            return View(await tasks.ToListAsync());
         }
 
         // GET: UserTask/Details/5
@@ -35,7 +38,25 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Users = _context.AspNetUsers.ToList();
+
+            var assignedUsers = _context.AssignedTasks.Include(x => x.User).Where(x => x.TaskId == id).ToList();
+
+            var notAssignedUsers = _context.AspNetUsers
+                                     .Where(u => !_context.AssignedTasks
+                                     .Any(ut => ut.UserId == u.Id && ut.TaskId == id))
+                                     .ToList();
+
+            if (assignedUsers != null)
+            {
+                ViewBag.Assigned = assignedUsers;
+
+            }
+            if (notAssignedUsers != null)
+            {
+                ViewBag.UnAssigned = notAssignedUsers;
+
+
+            }
             var userTask = await _context.UserTasks
                 .Include(u => u.Course)
                 .FirstOrDefaultAsync(m => m.TaskId == id);
@@ -50,9 +71,9 @@ namespace fire_station_training_and_vehicle.Controllers
         // GET: UserTask/Create
         public IActionResult Create()
         {
-            ViewBag.Users=_context.AspNetUsers.ToList();
+            //ViewBag.Users=_context.AspNetUsers.ToList();
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name");
-            var tasks=_context.UserTasks.Include(x=>x.Course).Where(x=>x.LastDate>DateTime.Now).ToList();
+            var tasks = _context.UserTasks.Include(x => x.Course).Where(x => x.LastDate > DateTime.Now).ToList();
             ViewBag.Tasks = tasks;
             return View();
         }
@@ -70,19 +91,25 @@ namespace fire_station_training_and_vehicle.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Users = _context.AspNetUsers.ToList();
+            //ViewBag.Users = _context.AspNetUsers.Where.ToList();
+
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", userTask.CourseId);
             return View(userTask);
         }
         [HttpPost]
-        public IActionResult AssignUser(List<string> selectedValues, int id)
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> AssignUser(List<string> selectedValues, int id)
         {
-            var userId = _userManager.GetUserId(HttpContext.User);
+            AssignedTask assigned = new AssignedTask();
             foreach (var item in selectedValues)
             {
-               
+                assigned.TaskId = id;
+                assigned.UserId = item;
+                _context.Add(assigned);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "User assigned successfully!!";
+                TempData["RedirectUrl"] = Url.Action("Create", "UserTask");
             }
-            // process selected values
             return Ok();
         }
 
@@ -172,14 +199,14 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 _context.UserTasks.Remove(userTask);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserTaskExists(int id)
         {
-          return (_context.UserTasks?.Any(e => e.TaskId == id)).GetValueOrDefault();
+            return (_context.UserTasks?.Any(e => e.TaskId == id)).GetValueOrDefault();
         }
     }
 }

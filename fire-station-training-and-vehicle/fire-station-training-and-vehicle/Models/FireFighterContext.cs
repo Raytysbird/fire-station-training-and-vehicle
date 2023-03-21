@@ -22,6 +22,7 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
+        public virtual DbSet<AssignedTask> AssignedTasks { get; set; } = null!;
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<Document> Documents { get; set; } = null!;
         public virtual DbSet<Gender> Genders { get; set; } = null!;
@@ -30,7 +31,6 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<RequestType> RequestTypes { get; set; } = null!;
         public virtual DbSet<Station> Stations { get; set; } = null!;
         public virtual DbSet<UserTask> UserTasks { get; set; } = null!;
-        public virtual DbSet<AssignedTask> AssignedTasks { get; set; } = null!;
         public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
         public virtual DbSet<VehicleCatalogue> VehicleCatalogues { get; set; } = null!;
         public virtual DbSet<VehicleReport> VehicleReports { get; set; } = null!;
@@ -57,17 +57,7 @@ namespace fire_station_training_and_vehicle.Models
 
                 entity.Property(e => e.NormalizedName).HasMaxLength(256);
             });
-            modelBuilder.Entity<AssignedTask>(entity =>
-            {
-                entity.HasKey(e => new { e.TaskId, e.UserId })
-                    .HasName("PK__Assigned__AD11C575A387F7CD");
 
-                entity.ToTable("AssignedTask");
-
-                entity.Property(e => e.TaskId).HasColumnName("Task_Id");
-
-                entity.Property(e => e.UserId).HasColumnName("User_Id");
-            });
             modelBuilder.Entity<AspNetRoleClaim>(entity =>
             {
                 entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
@@ -166,6 +156,30 @@ namespace fire_station_training_and_vehicle.Models
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.AspNetUserTokens)
                     .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AssignedTask>(entity =>
+            {
+                entity.HasKey(e => new { e.TaskId, e.UserId })
+                    .HasName("PK__Assigned__636993FAE1C363EF");
+
+                entity.ToTable("AssignedTask");
+
+                entity.Property(e => e.TaskId).HasColumnName("Task_Id");
+
+                entity.Property(e => e.UserId).HasColumnName("User_Id");
+
+                entity.HasOne(d => d.Task)
+                    .WithMany(p => p.AssignedTasks)
+                    .HasForeignKey(d => d.TaskId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKTask_FireF95093");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AssignedTasks)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKTask_FireF109412");
             });
 
             modelBuilder.Entity<Course>(entity =>
@@ -294,25 +308,12 @@ namespace fire_station_training_and_vehicle.Models
 
                 entity.ToTable("UserTask");
 
-                entity.Property(e => e.LastDate).HasColumnType("datetime");
+                entity.Property(e => e.LastDate).HasColumnType("date");
 
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.UserTasks)
                     .HasForeignKey(d => d.CourseId)
                     .HasConstraintName("FKTask776266");
-
-                entity.HasMany(d => d.Users)
-                    .WithMany(p => p.Tasks)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "TaskFireFighter",
-                        l => l.HasOne<AspNetUser>().WithMany().HasForeignKey("UserId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FKUser"),
-                        r => r.HasOne<UserTask>().WithMany().HasForeignKey("TaskId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FKTask"),
-                        j =>
-                        {
-                            j.HasKey("TaskId", "UserId").HasName("PK__Task_Fir__AD11C5755C90AB3F");
-
-                            j.ToTable("TaskFireFighter");
-                        });
             });
 
             modelBuilder.Entity<Vehicle>(entity =>

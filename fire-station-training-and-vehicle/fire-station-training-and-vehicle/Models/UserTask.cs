@@ -7,7 +7,7 @@ namespace fire_station_training_and_vehicle.Models
     {
         public UserTask()
         {
-            Users = new HashSet<AspNetUser>();
+            AssignedTasks = new HashSet<AssignedTask>();
         }
 
         public int TaskId { get; set; }
@@ -16,7 +16,6 @@ namespace fire_station_training_and_vehicle.Models
         public bool? IsCompleted { get; set; }
 
         public virtual Course? Course { get; set; }
-
-        public virtual ICollection<AspNetUser> Users { get; set; }
+        public virtual ICollection<AssignedTask> AssignedTasks { get; set; }
     }
 }
