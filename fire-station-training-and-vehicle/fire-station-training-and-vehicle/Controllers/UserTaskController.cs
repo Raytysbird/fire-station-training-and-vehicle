@@ -25,10 +25,17 @@ namespace fire_station_training_and_vehicle.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(HttpContext.User);
-            //var tasks = _context.UserTasks.Include(u => u.Course).Include(x => x.AssignedTasks);
-           
-            var tasks = _context.AssignedTasks.Include(x => x.Task).Include(x => x.Task.Course).Where(x => x.UserId == userId);
-            return View(await tasks.ToListAsync());
+
+            var currentTasks = await _context.AssignedTasks.Include(x => x.Task).Include(x => x.Task.Course).Where(x => x.UserId == userId).Where(x => x.Task.LastDate >= DateTime.Now && x.IsComplete==null).ToListAsync();
+            ViewBag.CurrentTasks = currentTasks;
+
+            var completeTasks = await _context.AssignedTasks.Include(x => x.Task).Include(x => x.Task.Course).Where(x => x.UserId == userId).Where(x => x.IsComplete == true).ToListAsync();
+            ViewBag.CompleteTasks = completeTasks;
+
+            var dueTasks = await _context.AssignedTasks.Include(x => x.Task).Include(x => x.Task.Course).Where(x => x.UserId == userId).Where(x => x.Task.LastDate <= DateTime.Now && x.IsComplete == null).ToListAsync();
+            ViewBag.DueTasks = dueTasks;
+
+            return View();
         }
 
         // GET: UserTask/Details/5
@@ -67,6 +74,23 @@ namespace fire_station_training_and_vehicle.Controllers
 
             return View(userTask);
         }
+        public async Task<IActionResult> CompleteTask(int? id)
+        {
+            if (id == null || _context.UserTasks == null)
+            {
+                return NotFound();
+            }
+            var userTask = await _context.UserTasks
+               .Include(u => u.Course)
+               .Include(x=>x.AssignedTasks)
+               .FirstOrDefaultAsync(m => m.TaskId == id);
+            if (userTask == null)
+            {
+                return NotFound();
+            }
+
+            return View(userTask);
+        }
 
         // GET: UserTask/Create
         public IActionResult Create()
@@ -96,6 +120,22 @@ namespace fire_station_training_and_vehicle.Controllers
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", userTask.CourseId);
             return View(userTask);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TaskConsent(UserTask userTask, bool consent)
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var task = await _context.AssignedTasks.Where(x => x.TaskId == userTask.TaskId).Where(x => x.UserId == userId).FirstOrDefaultAsync();
+            task.IsComplete = true;
+            if (task != null)
+            {
+                _context.Update(task);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> AssignUser(List<string> selectedValues, int id)
