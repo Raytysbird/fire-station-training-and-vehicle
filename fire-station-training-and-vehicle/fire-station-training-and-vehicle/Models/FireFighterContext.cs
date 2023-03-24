@@ -22,9 +22,11 @@ namespace fire_station_training_and_vehicle.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
+        public virtual DbSet<AssignedEvent> AssignedEvents { get; set; } = null!;
         public virtual DbSet<AssignedTask> AssignedTasks { get; set; } = null!;
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<Document> Documents { get; set; } = null!;
+        public virtual DbSet<Event> Events { get; set; } = null!;
         public virtual DbSet<Gender> Genders { get; set; } = null!;
         public virtual DbSet<IssueType> IssueTypes { get; set; } = null!;
         public virtual DbSet<Maintenance> Maintenances { get; set; } = null!;
@@ -158,6 +160,34 @@ namespace fire_station_training_and_vehicle.Models
                     .HasForeignKey(d => d.UserId);
             });
 
+            modelBuilder.Entity<AssignedEvent>(entity =>
+            {
+                entity.HasKey(e => new { e.EventId, e.UserId })
+                    .HasName("PK__Assigned__EF6D3693B64FF9AD");
+
+                entity.ToTable("AssignedEvent");
+
+                entity.Property(e => e.EventId).HasColumnName("Event_Id");
+
+                entity.Property(e => e.UserId).HasColumnName("User_Id");
+
+                entity.Property(e => e.Grade)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Event)
+                    .WithMany(p => p.AssignedEvents)
+                    .HasForeignKey(d => d.EventId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKEvent_Fire126288");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AssignedEvents)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKEvent_Fire660096");
+            });
+
             modelBuilder.Entity<AssignedTask>(entity =>
             {
                 entity.HasKey(e => new { e.TaskId, e.UserId })
@@ -220,6 +250,26 @@ namespace fire_station_training_and_vehicle.Models
                     .WithMany(p => p.Documents)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_Document_ToTable");
+            });
+
+            modelBuilder.Entity<Event>(entity =>
+            {
+                entity.ToTable("Event");
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Location)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.TeacherId).HasMaxLength(450);
+
+                entity.HasOne(d => d.Course)
+                    .WithMany(p => p.Events)
+                    .HasForeignKey(d => d.CourseId)
+                    .HasConstraintName("FKEvent515872");
             });
 
             modelBuilder.Entity<Gender>(entity =>

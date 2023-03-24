@@ -13,7 +13,10 @@ html {
     position: relative;
     min-height: 100%;   
 }
-
+main {
+    height: 100%;
+    padding-bottom: 50px;
+}
 body {
     margin: 0 auto; 
 }
@@ -23,12 +26,12 @@ h1{
 .footer {
     position: absolute;
     bottom: 0;
-    clear:both;
+    clear: both;
     width: 100%;
     color: white;
     text-align: center;
+    height: 50px;
     white-space: nowrap;
-    line-height: 60px;
     background-color: #000b38;
 }
 .navLink {

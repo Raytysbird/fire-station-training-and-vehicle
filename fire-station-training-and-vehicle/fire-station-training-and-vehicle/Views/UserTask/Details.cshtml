@@ -4,7 +4,7 @@
     ViewData["Title"] = "Task Details";
 }
 
-<h1>Manage Task</h1>
+<h1>Manage Task Assignees</h1>
 
 
 <div class="row ms-5 g-0">
@@ -97,9 +97,9 @@
                 withCredentials: false
             },
             success: function () {
-                alert("Success");
+               
                 var redirectUrl = '@TempData["RedirectUrl"]';
-                alert(redirectUrl);
+              
                 if (redirectUrl) {
                     // Perform a server-side redirect
                     window.location.href = redirectUrl;

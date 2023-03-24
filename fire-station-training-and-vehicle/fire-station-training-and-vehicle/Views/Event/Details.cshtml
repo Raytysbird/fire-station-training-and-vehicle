@@ -1,0 +1,128 @@
+﻿@model fire_station_training_and_vehicle.Models.Event
+
+@{
+    ViewData["Title"] = "Event Details";
+}
+
+<h1>Manage Event Assignees</h1>
+
+<div class="row ms-5 g-0">
+    <dl class="col-md-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Course)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Course.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+          <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dd class="col-sm-10" hidden id="taskId">
+            @Html.DisplayFor(model => model.EventId)
+        </dd>
+    </dl>
+
+    <div class="col-md-1">
+        <h5>Not assigned users</h5>
+        @if (ViewBag.UnAssignedEvent.Count > 0)
+        {
+            <form id="frmAssignUser">
+                @foreach (var item in ViewBag.UnAssignedEvent)
+                {
+                    <div>
+                        <input type="checkbox" id="@item.Id" name="@item.Id" value="@item.Id">
+                        <label for="@item.Id">@item.FirstName</label>
+                    </div>
+                }
+                <div class="form-group">
+                    <input type="submit" onclick="submitForm();" value="Assign Users" class="btn btn2" />
+                </div>
+            </form>
+        }
+        else
+        {
+            <p>All the users are aleady assigned to this event. </p>
+        }
+
+    </div>
+    <div class="col-md-5 mx-lg-4">
+        <h5>Assigned Users</h5>
+        @if (ViewBag.AssignedEvent.Count > 0)
+        {
+            @foreach (var item in ViewBag.AssignedEvent)
+            {
+                <ul>
+                    <li>
+                        @item.User.FirstName  <a class="link-danger" asp-action="Delete" asp-controller="AssignedEvent" asp-route-id="@item.EventId" asp-route-userId="@item.UserId">Remove assignment</a>
+                    </li>
+                </ul>
+            }
+        }
+        else
+        {
+            <p>No user is assigned to this event currently. </p>
+        }
+
+    </div>
+</div>
+<div>
+    <a asp-action="Create">Back to List</a>
+</div>
+<script>
+    function submitForm() {
+
+        var form = $("#frmAssignUser");
+        var id = $("#taskId").html();
+
+        //var data = $("#frmCourse").serialize();
+        //if (!form.valid() || !form2.valid()) {
+        //    return false;
+        //}
+
+        var selectedValues = [];
+        $('input[type=checkbox]:checked').each(function () {
+            selectedValues.push($(this).val());
+        });
+
+
+        $.ajax({
+            url: '/Event/AssignUser/',
+            type: 'POST',
+            data: { selectedValues: selectedValues, id: id },
+            xhrFields: {
+                withCredentials: false
+            },
+            success: function () {
+                var redirectUrl = '@TempData["RedirectUrl"]';
+                if (redirectUrl) {
+                    // Perform a server-side redirect
+                    window.location.href = redirectUrl;
+                }
+                //if(result.success){
+                //    window.location.href = result.redirectUrl;
+                //}
+
+            },
+            error: function (xhr, status, error) {
+                // handle error
+
+            }
+        });
+    }
+
+</script>

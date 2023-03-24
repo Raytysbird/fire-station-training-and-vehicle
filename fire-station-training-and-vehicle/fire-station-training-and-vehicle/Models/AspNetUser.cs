@@ -10,6 +10,7 @@ namespace fire_station_training_and_vehicle.Models
             AspNetUserClaims = new HashSet<AspNetUserClaim>();
             AspNetUserLogins = new HashSet<AspNetUserLogin>();
             AspNetUserTokens = new HashSet<AspNetUserToken>();
+            AssignedEvents = new HashSet<AssignedEvent>();
             AssignedTasks = new HashSet<AssignedTask>();
             Documents = new HashSet<Document>();
             VehicleReports = new HashSet<VehicleReport>();
@@ -44,6 +45,7 @@ namespace fire_station_training_and_vehicle.Models
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; }
+        public virtual ICollection<AssignedEvent> AssignedEvents { get; set; }
         public virtual ICollection<AssignedTask> AssignedTasks { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
         public virtual ICollection<VehicleReport> VehicleReports { get; set; }

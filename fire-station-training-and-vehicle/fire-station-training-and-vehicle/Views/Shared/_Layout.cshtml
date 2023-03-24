@@ -11,7 +11,8 @@
     <title>@ViewData["Title"] - Management</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@6.0.2/index.global.min.js"></script>*@
 </head>
 <body>
     <header>
@@ -371,7 +372,7 @@
     @RenderBody()
     </div>*@
 
-    <main role="main" class="pb-3">
+    <main role="main">
         @RenderBody()
     </main>
 
