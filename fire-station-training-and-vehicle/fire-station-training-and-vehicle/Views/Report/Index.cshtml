@@ -1,0 +1,77 @@
+﻿@model fire_station_training_and_vehicle.Models.Vehicle
+
+@{
+    ViewData["Title"] = "Reports Dashboard";
+
+}
+<style>
+    h1, h4 {
+        margin-bottom: 0.5em;
+        text-align: center;
+    }
+
+    .buttonContainer {
+        text-align: center;
+    }
+
+    .adminToggle {
+        margin-top: 1em;
+    }
+</style>
+
+
+<div>
+    <div>
+        <h1>Welcome to the Reports generation dashboard</h1>
+        <h4></h4>
+    </div>
+    <div class="buttonContainer">
+
+        <a class="btnGame btn btn-success" asp-controller="Report" asp-action="UserReport" id="manage_games">Employee List</a>
+        <a class="btnEvent btn btn-primary" asp-controller="Report" asp-action="StationReport" id="manage_events"> Stations List</a>
+        <a class="btnEvent btn btn-success" asp-controller="Report" asp-action="AllVehiclesList" id="manage_merch">Vehicle</a>
+        <a class="btnEvent btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#uploadModal">Vehicle Maintenance Record</a>
+        <a class="btnEvent btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">Reported Issues</a>
+    </div>
+</div>
+
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportModalLabel">Select Vehicle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="VehicleReport" asp-controller="Report" method="post">
+                <div class="modal-body">
+                    <label class="control-label"></label>
+                    <select asp-for="VehicleId" class="form-control" asp-items="ViewBag.VehicleId"></select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">Select Vehicle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="MaintenanceRecord" asp-controller="Report" method="post">
+                <div class="modal-body">
+                    <label class="control-label"></label>
+                    <select asp-for="VehicleId" class="form-control" asp-items="ViewBag.VehicleId"></select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

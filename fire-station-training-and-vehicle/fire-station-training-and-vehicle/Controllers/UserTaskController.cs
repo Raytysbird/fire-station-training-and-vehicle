@@ -113,12 +113,13 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 _context.Add(userTask);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["Success"] = "New Task Created successfully!!";
+                return RedirectToAction("Create");
             }
             //ViewBag.Users = _context.AspNetUsers.Where.ToList();
 
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", userTask.CourseId);
-            return View(userTask);
+            return RedirectToAction("Create");
         }
 
         [HttpPost]
@@ -131,6 +132,7 @@ namespace fire_station_training_and_vehicle.Controllers
             if (task != null)
             {
                 _context.Update(task);
+                TempData["Success"] = "Task completed successfully!!";
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index");

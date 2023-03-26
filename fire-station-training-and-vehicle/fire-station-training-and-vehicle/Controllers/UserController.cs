@@ -9,7 +9,7 @@ using fire_station_training_and_vehicle.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using fire_station_training_and_vehicle.Services;
-
+using ClosedXML.Excel;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
@@ -156,6 +156,7 @@ namespace fire_station_training_and_vehicle.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+      
         private bool AspNetUserExists(string id)
         {
             return _context.AspNetUsers.Any(e => e.Id == id);

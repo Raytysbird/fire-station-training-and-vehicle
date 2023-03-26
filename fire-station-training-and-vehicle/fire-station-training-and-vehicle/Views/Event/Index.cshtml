@@ -1,25 +1,30 @@
 ﻿@model IEnumerable<fire_station_training_and_vehicle.Models.Event>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Events Calendar";
 }
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
+            themeSystem: 'bootstrap5',
             initialView: 'dayGridMonth',
-            events: [
-                {
-                    title: 'Event 1',
-                    start: '2023-03-23T10:00:00',
-                    end: '2023-03-23T12:00:00'
-                },
-                {
-                    title: 'Event 2',
-                    start: '2023-03-24T14:00:00',
-                    end: '2023-03-24T16:00:00'
-                }
-            ]
+            events: '/Event/AllEvents',
+            eventClick: function (events) { // add eventClick callback function
+                $('#eventModal').modal('show');
+                console.log(events);
+                var location = events.event._def.extendedProps.location;
+                var title = events.event._def.title;
+                var start = new Date(events.event._instance.range.start);
+                var end = new Date(events.event._instance.range.end);
+
+                // show the modal
+                $('#eventTitle').text(title); // set the title of the modal
+                $('#eventStart').text(start.toLocaleString()); // set the title of the modal
+                $('#eventEnd').text(end.toLocaleString()); // set the title of the modal
+                $('#eventLocation').text(location); // set the title of the modal
+
+            }
         });
         calendar.render();
     });
@@ -29,16 +34,29 @@
         height: 600px;
     }
 
+    h1 {
+        margin-bottom: 0.5em;
+        text-align: center;
+    }
+
+    .buttonContainer {
+        text-align: center;
+    }
     /* Set the font family for the event titles */
     .fc-event-title {
         font-family: Arial, sans-serif;
     }
 </style>
-<h1>Index</h1>
+<div>
+    <h1>Welcome to events calendar</h1>
+</div>
+<div class="buttonContainer">
+    <a class="btnGame btn btn-success" asp-controller="VehicleReport" asp-action="Issues" id="manage_games">Issues Reported</a>
+    <a class="btnEvent btn btn-primary" asp-controller="Maintenance" asp-action="Create" id="manage_events"> Send vehicle for Maintenance</a>
+    <a class="btnEvent btn btn-success" asp-controller="Maintenance" asp-action="Index" id="manage_merch"> Vehicle History</a>
+    <a asp-controller="Maintenance" asp-action="NotInService" class="btnReview btn btn-info" id="approve_reviews">Move vehicle back to operation</a>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -46,52 +64,23 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 id="eventTitle"></h5>
+                Start Date: <p id="eventStart"></p>
+                End Date: <p id="eventEnd"></p>
+               Location: <p id="eventLocation"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TeacherId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeacherId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.CourseId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>*@

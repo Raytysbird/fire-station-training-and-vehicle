@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace fire_station_training_and_vehicle.Models
 {
@@ -14,6 +16,7 @@ namespace fire_station_training_and_vehicle.Models
         public int CourseId { get; set; }
         public string? Name { get; set; }
         public string? Details { get; set; }
+        [Display(Name = "Renewal Period")]
         public string? RenewalPeriod { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }

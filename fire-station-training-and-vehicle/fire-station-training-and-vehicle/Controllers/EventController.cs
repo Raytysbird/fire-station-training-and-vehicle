@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fire_station_training_and_vehicle.Models;
 using Microsoft.AspNetCore.Identity;
+using fire_station_training_and_vehicle.Models.Metadata;
+using ClosedXML.Excel;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
@@ -24,18 +26,36 @@ namespace fire_station_training_and_vehicle.Controllers
         // GET: Event
         public async Task<IActionResult> Index()
         {
-            //var userId = _userManager.GetUserId(HttpContext.User);
+            return View();
+        }
+        public async Task<IActionResult> Events()
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
 
-            //var currentTasks = await _context.AssignedEvents.Include(x => x.Event).Include(x => x.Event.Course).Where(x => x.UserId == userId).Where(x => x.Event.LastDate >= DateTime.Now && x.IsComplete == null).ToListAsync();
-            //ViewBag.CurrentTasks = currentTasks;
+            var scheduledEvents = await _context.AssignedEvents.Include(x => x.Event).Include(x => x.Event.Course).Where(x => x.UserId == userId).Where(x => x.Event.StartDate >= DateTime.Now && x.Attended == null).ToListAsync();
+            ViewBag.ScheduledEvents = scheduledEvents;
 
-            //var completeTasks = await _context.AssignedEvents.Include(x => x.Event).Include(x => x.Event.Course).Where(x => x.UserId == userId).Where(x => x.IsComplete == true).ToListAsync();
-            //ViewBag.CompleteTasks = completeTasks;
-
-            //var dueTasks = await _context.AssignedEvents.Include(x => x.Event).Include(x => x.Event.Course).Where(x => x.UserId == userId).Where(x => x.Event.LastDate <= DateTime.Now && x.IsComplete == null).ToListAsync();
-            //ViewBag.DueTasks = dueTasks;
+            var completeEvents = await _context.AssignedEvents.Include(x => x.Event).Include(x => x.Event.Course).Where(x => x.UserId == userId).Where(x => x.Attended == true).ToListAsync();
+            ViewBag.CompleteEvents = completeEvents;
 
             return View();
+        }
+        public IEnumerable<CalendarEvent> AllEvents()
+        {
+            CalendarEvent e = new CalendarEvent();
+            List<CalendarEvent> events = new List<CalendarEvent>();
+            var a = _context.Events.Include(x=>x.Course).ToList();
+            foreach (var item in a)
+            {
+                e.Id = item.EventId;
+                e.Title = item.Course.Name;
+                e.Start = (DateTime)item.StartDate;
+                e.End= (DateTime)item.EndDate;
+                e.Location=item.Location;
+                events.Add(e);
+            }
+
+            return events;
         }
 
         // GET: Event/Details/5
@@ -208,7 +228,7 @@ namespace fire_station_training_and_vehicle.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+       
         private bool EventExists(int id)
         {
           return (_context.Events?.Any(e => e.EventId == id)).GetValueOrDefault();

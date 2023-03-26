@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace fire_station_training_and_vehicle.Models
 {
@@ -11,7 +12,9 @@ namespace fire_station_training_and_vehicle.Models
         }
 
         public int TaskId { get; set; }
+        [Display(Name ="Course")]
         public int? CourseId { get; set; }
+        [Display(Name = "Last Date")]
         public DateTime? LastDate { get; set; }
         public bool? IsCompleted { get; set; }
 

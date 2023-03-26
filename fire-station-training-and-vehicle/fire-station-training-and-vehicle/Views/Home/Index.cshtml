@@ -71,69 +71,18 @@
     </symbol>
 </svg>
 
-<div class="container px-4 py-5" id="hanging-icons">
-    <h2 class="pb-2 border-bottom">Document Requests</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        @if (User.IsInRole("Employee"))
-        {
-            <div class="col d-flex align-items-start">
-                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
-                </div>
-                <div>
-                    <h2>Featured title</h2>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a asp-action="Create" asp-controller="Document" class="btn btn-outline-primary">
-                        New Request
-                    </a>
-                </div>
-            </div>
-        }
-        @if (User.IsInRole("Employee"))
-        {
-            <div class="col d-flex align-items-start">
-                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
-                </div>
-                <div>
-                    <h2>Featured title</h2>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a asp-action="Index" asp-controller="Document" class="btn btn-outline-success">
-                        Download Documents
-                    </a>
-                </div>
-            </div>
-        }
-        @if (User.IsInRole("Admin"))
-        {
 
-            <div class="col d-flex align-items-start">
-                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
-                </div>
-                <div>
-                    <h2>Featured title</h2>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a asp-action="Request" asp-controller="Document" class="btn btn-outline-dark">
-                        New Requests
-                    </a>
-                </div>
-            </div>
-        }
-    </div>
-</div>
 @if (User.IsInRole("Admin"))
 {
     <div class="container px-4 py-5" id="hanging-icons">
         <h2 class="pb-2 border-bottom">Firefighters</h2>
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>Add Employee</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-primary">
                         New user
@@ -146,22 +95,10 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>All Employees</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-action="Index" asp-controller="User" class="btn btn-outline-success">
                         All Users
-                    </a>
-                </div>
-            </div>
-            <div class="col d-flex align-items-start">
-                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
-                </div>
-                <div>
-                    <h2>Featured title</h2>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a href="#" class="btn btn-outline-dark">
-                        Update Status
                     </a>
                 </div>
             </div>
@@ -178,7 +115,7 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>All Stations</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-action="Index" asp-controller="Station" class="btn btn-outline-primary">
                         All Stations
@@ -191,25 +128,14 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>New Station</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-action="Create" asp-controller="Station" class="btn btn-outline-primary">
                         New Station
                     </a>
                 </div>
             </div>
-            <div class="col d-flex align-items-start">
-                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
-                </div>
-                <div>
-                    <h2>Featured title</h2>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a href="#" class="btn btn-outline-dark">
-                        Maintenance Record
-                    </a>
-                </div>
-            </div>
+          
         </div>
     </div>
 }
@@ -224,7 +150,7 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>New Vehicle</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-action="Create" asp-controller="Vehicle" class="btn btn-outline-primary">
                         New Vehicle
@@ -238,7 +164,7 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>All Vehicles</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-action="Index" asp-controller="Vehicle" class="btn btn-outline-success">
                         All Vehicles
@@ -251,10 +177,10 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>Vehicle Dashboard</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-action="MaintenanceHome" asp-controller="Maintenance" class="btn btn-outline-dark">
-                       Vehicle maintenance board
+                       Vehicle maintenance dashboard
                     </a>
                 </div>
             </div>
@@ -266,7 +192,7 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>Report Vehicle Issue</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a asp-action="Create" asp-controller="VehicleReport" class="btn btn-outline-dark">
                         Report vehicle issue
@@ -276,9 +202,8 @@
         }
     </div>
 </div>
-
 <div class="container px-4 py-5" id="hanging-icons">
-    <h2 class="pb-2 border-bottom">Training</h2>
+    <h2 class="pb-2 border-bottom">Courses</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         @if (User.IsInRole("Admin"))
         {
@@ -287,38 +212,148 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>All Courses</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-primary">
-                        New Event
+                    <a asp-action="Index" asp-controller="Course" class="btn btn-outline-primary">
+                       All Courses
+                    </a>
+                </div>
+            </div>
+             <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
+                </div>
+                <div>
+                    <h2>New Course</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Create" asp-controller="Course" class="btn btn-outline-primary">
+                      Add Course
                     </a>
                 </div>
             </div>
         }
-        <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+       
+    </div>
+</div>
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Tasks</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
+                </div>
+                <div>
+                    <h2>New Task</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Create" asp-controller="UserTask" class="btn btn-outline-primary">
+                        Create Tasks
+                    </a>
+                </div>
+            </div>
+        }
+        @if (User.IsInRole("Employee"))
+        {
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
             </div>
             <div>
-                <h2>Featured title</h2>
+                <h2>My Tasks</h2>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a asp-action="Index" asp-controller="User" class="btn btn-outline-success">
-                    Scheduled sessions
+                    <a asp-action="Index" asp-controller="UserTask" class="btn btn-outline-success">
+                    My Tasks
                 </a>
             </div>
         </div>
-        <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
+        }
+    </div>
+</div>
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Tasks</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
+                </div>
+                <div>
+                    <h2>New Event</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Create" asp-controller="Event" class="btn btn-outline-primary">
+                        Create Event
+                    </a>
+                </div>
             </div>
-            <div>
-                <h2>Featured title</h2>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a href="#" class="btn btn-outline-dark">
-                    Add credentials
-                </a>
+        }
+        @if (User.IsInRole("Employee"))
+        {
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
+                </div>
+                <div>
+                    <h2>My Tasks</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Index" asp-controller="UserTask" class="btn btn-outline-success">
+                        My Tasks
+                    </a>
+                </div>
             </div>
-        </div>
+        }
+    </div>
+</div>
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Document Requests</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        @if (User.IsInRole("Employee"))
+        {
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
+                </div>
+                <div>
+                    <h2>Document Request</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Create" asp-controller="Document" class="btn btn-outline-primary">
+                        New Request
+                    </a>
+                </div>
+            </div>
+        }
+        @if (User.IsInRole("Employee"))
+        {
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
+                </div>
+                <div>
+                    <h2>Download Documents</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Index" asp-controller="Document" class="btn btn-outline-success">
+                        Download Documents
+                    </a>
+                </div>
+            </div>
+        }
+        @if (User.IsInRole("Admin"))
+        {
+
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
+                </div>
+                <div>
+                    <h2>New Document Requests</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <a asp-action="Request" asp-controller="Document" class="btn btn-outline-dark">
+                        New Requests
+                    </a>
+                </div>
+            </div>
+        }
     </div>
 </div>
 <div class="container px-4 py-5" id="hanging-icons">
@@ -331,37 +366,13 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2" /></svg>
                 </div>
                 <div>
-                    <h2>Featured title</h2>
+                    <h2>Reports</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-primary">
-                        Vehicle Report
+                    <a asp-action="Index" asp-asp-controller="Report" class="btn btn-outline-primary">
+                        Reports Dashboard
                     </a>
                 </div>
             </div>
-        }
-        <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill" /></svg>
-            </div>
-            <div>
-                <h2>Featured title</h2>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a asp-action="Index" asp-controller="User" class="btn btn-outline-success">
-                    Employee Report
-                </a>
-            </div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#tools" /></svg>
-            </div>
-            <div>
-                <h2>Featured title</h2>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a href="#" class="btn btn-outline-dark">
-                    Training Report
-                </a>
-            </div>
-        </div>
+        }    
     </div>
 </div>
