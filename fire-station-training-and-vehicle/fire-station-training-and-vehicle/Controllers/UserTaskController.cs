@@ -80,6 +80,7 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 return NotFound();
             }
+
             var userTask = await _context.UserTasks
                .Include(u => u.Course)
                .Include(x=>x.AssignedTasks)
