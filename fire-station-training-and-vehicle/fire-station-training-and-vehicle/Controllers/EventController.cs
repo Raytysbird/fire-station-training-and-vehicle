@@ -9,6 +9,8 @@ using fire_station_training_and_vehicle.Models;
 using Microsoft.AspNetCore.Identity;
 using fire_station_training_and_vehicle.Models.Metadata;
 using ClosedXML.Excel;
+using System.Security.Claims;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
@@ -16,11 +18,14 @@ namespace fire_station_training_and_vehicle.Controllers
     {
         private readonly FireFighterContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public EventController(FireFighterContext context, UserManager<User> userManager)
+
+        public EventController(FireFighterContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // GET: Event
@@ -42,19 +47,22 @@ namespace fire_station_training_and_vehicle.Controllers
         }
         public IEnumerable<CalendarEvent> AllEvents()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+           
+           
             CalendarEvent e = new CalendarEvent();
             List<CalendarEvent> events = new List<CalendarEvent>();
-            var a = _context.Events.Include(x=>x.Course).ToList();
+            // var a = _context.Events.Include(x=>x.Course).Include(x=>x.AssignedEvents).Where(x=>x.AssignedEvents.).ToList();
+            var a = _context.AssignedEvents.Include(x => x.Event).Include(x => x.Event.Course).Where(x => x.UserId == userId).ToList();
             foreach (var item in a)
             {
                 e.Id = item.EventId;
-                e.Title = item.Course.Name;
-                e.Start = (DateTime)item.StartDate;
-                e.End= (DateTime)item.EndDate;
-                e.Location=item.Location;
+                e.Title = item.Event.Course.Name;
+                e.Start = (DateTime)item.Event.StartDate;
+                e.End= (DateTime)item.Event.EndDate;
+                e.Location=item.Event.Location;
                 events.Add(e);
             }
-
             return events;
         }
 
@@ -135,7 +143,7 @@ namespace fire_station_training_and_vehicle.Controllers
             }
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", @event.CourseId);
             ViewData["TeacherId"] = new SelectList(_context.AspNetUsers, "Id", "FirstName");
-            return View(@event);
+            return RedirectToAction("Create");
         }
 
         // GET: Event/Edit/5

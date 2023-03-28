@@ -76,6 +76,7 @@ namespace fire_station_training_and_vehicle.Controllers
         }
         public async Task<IActionResult> CompleteTask(int? id)
         {
+            var userId = _userManager.GetUserId(HttpContext.User);
             if (id == null || _context.UserTasks == null)
             {
                 return NotFound();
@@ -85,6 +86,12 @@ namespace fire_station_training_and_vehicle.Controllers
                .Include(u => u.Course)
                .Include(x=>x.AssignedTasks)
                .FirstOrDefaultAsync(m => m.TaskId == id);
+            var isComplete = await _context.AssignedTasks.Where(x => x.TaskId == id && x.UserId == userId).FirstOrDefaultAsync();
+            if (isComplete!=null)
+            {
+                ViewBag.IsComplete = isComplete.IsComplete;
+            }
+           
             if (userTask == null)
             {
                 return NotFound();

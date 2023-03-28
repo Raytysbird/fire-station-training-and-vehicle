@@ -30,7 +30,7 @@
             </div>
 
             <div class="row">
-                @if (Model.IsCompleted==false||Model.IsCompleted==null)
+                @if  (ViewBag.IsComplete!=true)
                 {
                     <form method="post" asp-action="TaskConsent">
                         <div class="form-group" hidden>

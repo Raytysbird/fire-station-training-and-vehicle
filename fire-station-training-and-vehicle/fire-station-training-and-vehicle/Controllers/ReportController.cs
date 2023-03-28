@@ -57,7 +57,7 @@ namespace fire_station_training_and_vehicle.Controllers
                     return File(
                         content,
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        "UserList.xlsx"
+                        "UserList" + DateTime.Now + ".xlsx"
                         );
                 }
 
@@ -97,7 +97,7 @@ namespace fire_station_training_and_vehicle.Controllers
                     return File(
                         content,
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        "StationsList.xlsx"
+                        "StationsList" + DateTime.Now + ".xlsx"
                         );
                 }
 
@@ -142,7 +142,7 @@ namespace fire_station_training_and_vehicle.Controllers
                     return File(
                         content,
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        "VehicleList.xlsx"
+                        "VehicleList" + DateTime.Now + ".xlsx"
                         );
                 }
 
@@ -161,7 +161,7 @@ namespace fire_station_training_and_vehicle.Controllers
                 worksheet.Cell(currentRow, 3).Value = "Description";
                 worksheet.Cell(currentRow, 4).Value = "Mieleage";
                 worksheet.Cell(currentRow, 5).Value = "Special Notes";
-              
+
                 var record = _context.Maintenances.Include(x => x.Vehicle).Where(x => x.VehicleId == vehicle.VehicleId).ToList();
                 foreach (var item in record)
                 {
@@ -181,7 +181,7 @@ namespace fire_station_training_and_vehicle.Controllers
                     return File(
                         content,
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        "MaintenanceRecord.xlsx"
+                        "MaintenanceRecord" + DateTime.Now + ".xlsx"
                         );
                 }
 
@@ -202,13 +202,13 @@ namespace fire_station_training_and_vehicle.Controllers
                 worksheet.Cell(currentRow, 5).Value = "Issue";
                 worksheet.Cell(currentRow, 6).Value = "Description";
 
-                var record = _context.VehicleReports.Include(x => x.Vehicle).Include(x=>x.User).Where(x => x.VehicleId == vehicle.VehicleId).ToList();
+                var record = _context.VehicleReports.Include(x => x.Vehicle).Include(x => x.User).Where(x => x.VehicleId == vehicle.VehicleId).ToList();
                 foreach (var item in record)
                 {
                     currentRow++;
                     count++;
                     worksheet.Cell(currentRow, 1).Value = item.Vehicle.Name;
-                    worksheet.Cell(currentRow, 2).Value = item.User.FirstName+" "+item.User.LastName;
+                    worksheet.Cell(currentRow, 2).Value = item.User.FirstName + " " + item.User.LastName;
                     worksheet.Cell(currentRow, 3).Value = item.DateReported;
                     worksheet.Cell(currentRow, 4).Value = item.Status;
                     worksheet.Cell(currentRow, 5).Value = item.IssueType;
@@ -222,7 +222,7 @@ namespace fire_station_training_and_vehicle.Controllers
                     return File(
                         content,
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        "VehicleReport.xlsx"
+                        "VehicleReport" + DateTime.Now + ".xlsx"
                         );
                 }
 
