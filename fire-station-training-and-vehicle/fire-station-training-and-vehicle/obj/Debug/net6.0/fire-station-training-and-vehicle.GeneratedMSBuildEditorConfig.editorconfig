@@ -192,6 +192,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/Event/MarkAttendence.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcTWFya0F0dGVuZGVuY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/Event/TeacherEvents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcVGVhY2hlckV2ZW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/CPA10/Capstone/fire-station-training-and-vehicle/fire-station-training-and-vehicle/fire-station-training-and-vehicle/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

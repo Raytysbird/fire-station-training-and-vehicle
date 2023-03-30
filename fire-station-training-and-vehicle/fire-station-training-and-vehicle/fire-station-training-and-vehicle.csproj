@@ -27,4 +27,11 @@
     <Folder Include="Upload\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Event\TeacherEvents.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

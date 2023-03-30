@@ -11,6 +11,7 @@ using fire_station_training_and_vehicle.Models.Metadata;
 using ClosedXML.Excel;
 using System.Security.Claims;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
@@ -33,6 +34,42 @@ namespace fire_station_training_and_vehicle.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> TeacherEvents()
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var events = _context.Events.Include(x=>x.Course).Where( x => x.TeacherId == userId && x.StartDate <= DateTime.Now && x.EndDate >=DateTime.Now).ToList();
+
+
+            return View(events);
+        }
+        public async Task<IActionResult> MarkAttendence(int? id)
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var assignedEventUsers = _context.AssignedEvents.Include(x=>x.Event).Include(x => x.User).Where(x => x.EventId == id && x.Attended==null).ToList();
+            ViewBag.AttendUser = assignedEventUsers;
+            return View();
+        }
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> PostAttendence(List<string> selectedValues, int id)
+        {
+          
+            AssignedEvent assigned = new AssignedEvent();
+            foreach (var item in selectedValues)
+            {
+                var events=_context.AssignedEvents.Where(x=>x.UserId.Contains(item) && x.EventId==id).ToList();
+                foreach (var e in events)
+                {
+                    e.Attended = true;
+                    _context.Update(e);
+                    await _context.SaveChangesAsync();
+                }
+                TempData["Success"] = "Attendence successfully!!";
+                TempData["RedirectUrl"] = Url.Action("Create", "UserTask");
+            }
+            return Ok();
+        }
         public async Task<IActionResult> Events()
         {
             var userId = _userManager.GetUserId(HttpContext.User);
@@ -48,8 +85,8 @@ namespace fire_station_training_and_vehicle.Controllers
         public IEnumerable<CalendarEvent> AllEvents()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-           
-           
+
+
             CalendarEvent e = new CalendarEvent();
             List<CalendarEvent> events = new List<CalendarEvent>();
             // var a = _context.Events.Include(x=>x.Course).Include(x=>x.AssignedEvents).Where(x=>x.AssignedEvents.).ToList();
@@ -59,8 +96,8 @@ namespace fire_station_training_and_vehicle.Controllers
                 e.Id = item.EventId;
                 e.Title = item.Event.Course.Name;
                 e.Start = (DateTime)item.Event.StartDate;
-                e.End= (DateTime)item.Event.EndDate;
-                e.Location=item.Event.Location;
+                e.End = (DateTime)item.Event.EndDate;
+                e.Location = item.Event.Location;
                 events.Add(e);
             }
             return events;
@@ -139,7 +176,7 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 _context.Add(@event);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create");
             }
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", @event.CourseId);
             ViewData["TeacherId"] = new SelectList(_context.AspNetUsers, "Id", "FirstName");
@@ -208,7 +245,7 @@ namespace fire_station_training_and_vehicle.Controllers
             }
 
             var @event = await _context.Events
-                .Include(x=>x.Course)
+                .Include(x => x.Course)
                 .FirstOrDefaultAsync(m => m.EventId == id);
             if (@event == null)
             {
@@ -232,14 +269,14 @@ namespace fire_station_training_and_vehicle.Controllers
             {
                 _context.Events.Remove(@event);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-       
+
         private bool EventExists(int id)
         {
-          return (_context.Events?.Any(e => e.EventId == id)).GetValueOrDefault();
+            return (_context.Events?.Any(e => e.EventId == id)).GetValueOrDefault();
         }
     }
 }

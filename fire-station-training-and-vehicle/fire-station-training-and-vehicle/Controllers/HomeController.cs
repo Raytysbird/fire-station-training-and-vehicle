@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace fire_station_training_and_vehicle.Controllers
 {
@@ -25,6 +26,12 @@ namespace fire_station_training_and_vehicle.Controllers
         {
             var id = _userManager.GetUserId(HttpContext.User);
             var user =  _context.AspNetUsers.Where(x=>x.Id== id).FirstOrDefault();
+            var isTeacher = _context.Events.Where(x => x.TeacherId == id && x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now).ToList();
+            if (isTeacher.Count>0)
+            {
+                ViewBag.IsTeacher = true;
+            }
+
             if (user.IsPasswordChanged==false)
             {
                 TempData["Warning"] = "We have provided you one time use passowrd. Please reset your passowrd.";
@@ -39,6 +46,7 @@ namespace fire_station_training_and_vehicle.Controllers
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
 
             }
+           
             
         }
 
